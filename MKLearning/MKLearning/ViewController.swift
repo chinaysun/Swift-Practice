@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ViewController: UIViewController,CLLocationManagerDelegate {
+class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelegate {
 
     
     let locationManager = CLLocationManager()
@@ -109,8 +109,48 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
     }
     
+    @IBAction func addCustomerizedPinTapped(_ sender: UIButton) {
+        
+        let myCustomerPin = customerPin()
+        myCustomerPin.coordinate = CLLocationCoordinate2DMake(-37.800794817162206, 144.95468064470515)
+        myCustomerPin.title = "This my second Pin"
+        myCustomerPin.subtitle = "I changed its color to purple"
+        myCustomerPin.specialIdentify = "This is a special pin"
+        
 
-    
+        myMap.addAnnotation(myCustomerPin)
+        
+        
+    }
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        //juge the annotation then change the color
+        if annotation is customerPin
+        {
+            //to see if an existing annotation view of the desired type already exists
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "myCustomerPin") as? MKPinAnnotationView
+            
+            if pinView == nil
+            {
+                pinView = MKPinAnnotationView.init(annotation: annotation, reuseIdentifier: "myCustomerPin")
+                
+                pinView!.canShowCallout = true
+                pinView!.pinTintColor = UIColor.purple
+                
+            }
+            else
+            {
+                pinView!.annotation = annotation
+            }
+
+            return pinView
+        }
+        
+        
+        return nil
+        
+    }
     
     
     
@@ -137,6 +177,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
             
         }
+        
+        myMap.delegate = self
         
 
         
