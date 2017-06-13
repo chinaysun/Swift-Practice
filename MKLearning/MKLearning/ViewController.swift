@@ -13,6 +13,15 @@ import CoreLocation
 class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelegate {
 
     
+    //textLabel for address
+    @IBOutlet weak var streetTextLabel: UILabel!
+    @IBOutlet weak var cityTextLabel: UILabel!
+    @IBOutlet weak var stateTextLabel: UILabel!
+    @IBOutlet weak var postalCodeTextLabel: UILabel!
+    @IBOutlet weak var countryTextLabel: UILabel!
+    
+    
+    
     let locationManager = CLLocationManager()
     
     //default location for tester
@@ -22,14 +31,18 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     @IBOutlet weak var myMap: MKMapView!
     
     
+    //passing info
+    var passingInfo:String = ""
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        print(locations)
-        let location = locations.last!
+//        print(locations)
+        let location = locations.last
     
         
         let span:MKCoordinateSpan = MKCoordinateSpanMake(0.001,0.001)
-        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location!.coordinate.latitude, location!.coordinate.longitude)
         let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
         
         myMap.setRegion(region, animated: true)
@@ -38,10 +51,75 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         self.myMap.showsBuildings = true
         
         
+        //get current Address
+        
+        CLGeocoder().reverseGeocodeLocation(location!, completionHandler: { (placemarks,error)->Void in  // Place details
+            var placeMark: CLPlacemark!
+            placeMark = placemarks?[0]
+            
+            self.updateCurrentAddressUI(placeMark: placeMark)
+            
+        
+      })
+        
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+    }
+    
+    func updateCurrentAddressUI(placeMark:CLPlacemark)
+    {
+        // Address dictionary
+        //print(placeMark.addressDictionary, terminator: "")
+        
+                    // Location name
+        if let locationName = placeMark.addressDictionary!["Name"] as? String
+        {
+            streetTextLabel.text = "Street: " + locationName
+        }
+        
+        var cityIntegration = ""
+        
+        if let city = placeMark.addressDictionary!["City"] as? String
+        {
+            cityIntegration = city
+        }
+        
+        if let moreCityInfo = placeMark.addressDictionary!["SubLocality"] as? String
+        {
+            if !cityIntegration.isEmpty
+            {
+                cityIntegration = cityIntegration + ", " + moreCityInfo
+            }
+        }
+        
+        if !cityIntegration.isEmpty
+        {
+            cityTextLabel.text = "City: " + cityIntegration
+        }
+        
+        if let state = placeMark.addressDictionary!["State"] as? String
+        {
+            stateTextLabel.text = "State: " + state
+            
+        }
+        
+        if let zip = placeMark.addressDictionary!["ZIP"] as? String
+        {
+            postalCodeTextLabel.text = "Postal Code: " + zip
+        }
+        
+        if let country = placeMark.addressDictionary!["Country"] as? String
+        {
+            countryTextLabel.text = "Country: " + country
+        }
+        
+        
+        
+        
+
     }
     
     @IBAction func fixButtonTapped(_ sender: Any) {
@@ -115,7 +193,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         myCustomerPin.coordinate = CLLocationCoordinate2DMake(-37.800794817162206, 144.95468064470515)
         myCustomerPin.title = "This my second Pin"
         myCustomerPin.subtitle = "I changed its color to purple"
-        myCustomerPin.specialIdentify = "This is a special pin"
+        myCustomerPin.specialIdentify = "This is a special pin that you selected"
         
 
         myMap.addAnnotation(myCustomerPin)
@@ -125,18 +203,37 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        //juge the annotation then change the color
+        //juge the annotation then create customerized view
         if annotation is customerPin
         {
+            let reuseID = "myCustomerPin"
+            
             //to see if an existing annotation view of the desired type already exists
-            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "myCustomerPin") as? MKPinAnnotationView
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
             
             if pinView == nil
             {
-                pinView = MKPinAnnotationView.init(annotation: annotation, reuseIdentifier: "myCustomerPin")
+                pinView = MKPinAnnotationView.init(annotation: annotation, reuseIdentifier: reuseID)
                 
-                pinView!.canShowCallout = true
+                
                 pinView!.pinTintColor = UIColor.purple
+                
+                //start to set callout left & right
+                pinView!.canShowCallout = true
+                
+                //Add UIbutton at right callout accessory
+                let imageButton = UIButton()
+                imageButton.setBackgroundImage(UIImage(named:"moreInfo"), for: UIControlState.normal)
+                imageButton.sizeToFit()
+                pinView?.rightCalloutAccessoryView = imageButton
+                
+                
+                //Add Image View at left callout accessory
+                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 46, height: 46))
+                pinView?.leftCalloutAccessoryView = imageView
+                
+                
+                
                 
             }
             else
@@ -153,7 +250,67 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     }
     
     
+    //delegate to when an annotation being selected
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        self.updateLeftCalloutAccessoryImage(annotationView: view)
+    }
     
+    
+    func updateLeftCalloutAccessoryImage(annotationView:MKAnnotationView)
+    {
+        //method to fitch image from database
+        var myImageView:UIImageView? = nil
+        
+        //Check if left is ImageView
+        if annotationView.leftCalloutAccessoryView is UIImageView {
+            myImageView = annotationView.leftCalloutAccessoryView as? UIImageView
+        }
+        
+        if (myImageView != nil)
+        {
+             myImageView?.image = UIImage(named: "download")
+        }
+       
+
+        
+    }
+    
+    
+    
+    //This method control when accessory buttons being tapped
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
+    {
+        
+        
+       if view.annotation is customerPin
+       {
+           let annotation:customerPin = view.annotation as! customerPin
+        
+           self.passingInfo = annotation.specialIdentify
+        
+            performSegue(withIdentifier: "showDetailPinInfo", sender: self)
+        
+       }
+        
+       
+        
+        
+    }
+    
+    
+    //this method is used to prepare date in segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        
+        if segue.identifier == "showDetailPinInfo"
+        {
+            let secondViewControl:customerPinVC = segue.destination as! customerPinVC
+            
+            secondViewControl.receivedInfo = self.passingInfo
+        }
+  
+    }
    
     
     override func viewDidLoad() {

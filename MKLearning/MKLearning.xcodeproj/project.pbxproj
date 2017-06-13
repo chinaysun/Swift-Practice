@@ -16,6 +16,8 @@
 		546F06791EE96A7A000F2A5E /* MKLearningUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546F06781EE96A7A000F2A5E /* MKLearningUITests.swift */; };
 		546F06881EE96A9E000F2A5E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546F06871EE96A9E000F2A5E /* MapKit.framework */; };
 		546F068A1EE96D95000F2A5E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546F06891EE96D95000F2A5E /* CoreLocation.framework */; };
+		546F068C1EEE26CC000F2A5E /* customerPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546F068B1EEE26CC000F2A5E /* customerPin.swift */; };
+		547128521EF01CFC00C30855 /* customerPinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547128511EF01CFC00C30855 /* customerPinVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		546F067A1EE96A7A000F2A5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		546F06871EE96A9E000F2A5E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		546F06891EE96D95000F2A5E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		546F068B1EEE26CC000F2A5E /* customerPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customerPin.swift; sourceTree = "<group>"; };
+		547128511EF01CFC00C30855 /* customerPinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customerPinVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +108,11 @@
 		546F06571EE96A7A000F2A5E /* MKLearning */ = {
 			isa = PBXGroup;
 			children = (
-				546F06581EE96A7A000F2A5E /* AppDelegate.swift */,
+				547128531EF01D2100C30855 /* Supporting File */,
 				546F065A1EE96A7A000F2A5E /* ViewController.swift */,
 				546F065C1EE96A7A000F2A5E /* Main.storyboard */,
-				546F065F1EE96A7A000F2A5E /* Assets.xcassets */,
-				546F06611EE96A7A000F2A5E /* LaunchScreen.storyboard */,
-				546F06641EE96A7A000F2A5E /* Info.plist */,
+				546F068B1EEE26CC000F2A5E /* customerPin.swift */,
+				547128511EF01CFC00C30855 /* customerPinVC.swift */,
 			);
 			path = MKLearning;
 			sourceTree = "<group>";
@@ -139,6 +142,17 @@
 				546F06871EE96A9E000F2A5E /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		547128531EF01D2100C30855 /* Supporting File */ = {
+			isa = PBXGroup;
+			children = (
+				546F06581EE96A7A000F2A5E /* AppDelegate.swift */,
+				546F065F1EE96A7A000F2A5E /* Assets.xcassets */,
+				546F06611EE96A7A000F2A5E /* LaunchScreen.storyboard */,
+				546F06641EE96A7A000F2A5E /* Info.plist */,
+			);
+			name = "Supporting File";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,7 +297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				547128521EF01CFC00C30855 /* customerPinVC.swift in Sources */,
 				546F065B1EE96A7A000F2A5E /* ViewController.swift in Sources */,
+				546F068C1EEE26CC000F2A5E /* customerPin.swift in Sources */,
 				546F06591EE96A7A000F2A5E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,6 +553,7 @@
 				546F067F1EE96A7A000F2A5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		546F06801EE96A7A000F2A5E /* Build configuration list for PBXNativeTarget "MKLearningTests" */ = {
 			isa = XCConfigurationList;
@@ -545,6 +562,7 @@
 				546F06821EE96A7A000F2A5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		546F06831EE96A7A000F2A5E /* Build configuration list for PBXNativeTarget "MKLearningUITests" */ = {
 			isa = XCConfigurationList;
@@ -553,6 +571,7 @@
 				546F06851EE96A7A000F2A5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
