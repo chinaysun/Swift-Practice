@@ -13,4 +13,6 @@ class customerPin: MKPointAnnotation{
     
     public var specialIdentify:String = ""
     
+    
+    
 }

@@ -20,6 +20,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     @IBOutlet weak var postalCodeTextLabel: UILabel!
     @IBOutlet weak var countryTextLabel: UILabel!
     
+    @IBOutlet weak var distanceTextLabel: UILabel!
+    
+    
     
     
     let locationManager = CLLocationManager()
@@ -27,6 +30,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     //default location for tester
     let myLatitude:CLLocationDegrees = -37.8009135
     let myLongtitude:CLLocationDegrees =  144.95518489999995
+    
+    
+    var myCurrentLocation:CLLocationCoordinate2D?
+    var myDestination:CLLocationCoordinate2D?
+    
     
     @IBOutlet weak var myMap: MKMapView!
     
@@ -39,16 +47,16 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         
 //        print(locations)
         let location = locations.last
-    
+        self.myCurrentLocation = location?.coordinate
         
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.001,0.001)
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.003,0.003)
         let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location!.coordinate.latitude, location!.coordinate.longitude)
         let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
         
         myMap.setRegion(region, animated: true)
         
         self.myMap.showsUserLocation = true
-        self.myMap.showsBuildings = true
+    
         
         
         //get current Address
@@ -134,8 +142,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
       
                 
         let myCoordinator = CLLocationCoordinate2DMake(myLatitude, myLongtitude)
+        myCurrentLocation = myCoordinator
                 
-       myMap.camera.centerCoordinate = myCoordinator
+        myMap.camera.centerCoordinate = myCoordinator
     
         
      
@@ -254,6 +263,32 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         self.updateLeftCalloutAccessoryImage(annotationView: view)
+        
+        self.updateDistanceFromCurrentLocation(annotationView: view)
+        
+        //set destination
+        let destinationPoint = view.annotation?.coordinate
+        self.myDestination = CLLocationCoordinate2DMake((destinationPoint?.latitude)!, (destinationPoint?.longitude)!)
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        
+        //Empty the destination
+        self.myDestination = nil
+        
+    }
+    
+    func updateDistanceFromCurrentLocation(annotationView:MKAnnotationView)
+    {
+        let startPoint = CLLocation(latitude: (myCurrentLocation?.latitude)!, longitude: (myCurrentLocation?.longitude)!)
+        let destinationPoint = annotationView.annotation?.coordinate
+        let destination = CLLocation(latitude: (destinationPoint?.latitude)!, longitude:(destinationPoint?.longitude)!)
+        
+        let distance = startPoint.distance(from: destination)
+        
+        self.distanceTextLabel.text = "Distance: " + String(distance) + " Meters"
+        
     }
     
     
@@ -299,6 +334,79 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     }
     
     
+    @IBAction func navigationButtonTapped(_ sender: UIButton) {
+        
+        if myDestination != nil && myCurrentLocation != nil
+        {
+            self.getNavigationRoute(source: myCurrentLocation!, destination: myDestination!)
+        }
+    }
+    
+    
+    func getNavigationRoute(source:CLLocationCoordinate2D,destination:CLLocationCoordinate2D)
+    {
+        
+        let sourcePlacemark = MKPlacemark(coordinate: source)
+        let destinationPlacemark = MKPlacemark(coordinate: destination)
+        
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        let directionRequest = MKDirectionsRequest()
+        directionRequest.source = sourceMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .walking
+        
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate(completionHandler: {
+            response,error in
+        
+            guard let response = response else
+            {
+                if let error = error
+                {
+                    print("Something Went Wrong")
+                }
+                return
+            }
+            
+            //remove existed overlay
+            let overlays = self.myMap.overlays
+            self.myMap.removeOverlays(overlays)
+            
+            
+            //only get one route not alternative
+            let route = response.routes[0]
+            self.myMap.add(route.polyline, level: .aboveRoads)
+            
+            //alertinative route 
+//            for route in response.routes 
+//            {
+//                self.myMap.add(route.polyline, level: .aboveRoads)
+//            }
+            
+            
+            //room out the map
+            let rekt = route.polyline.boundingMapRect
+            self.myMap.setRegion(MKCoordinateRegionForMapRect(rekt), animated: true)
+            
+        
+        })
+        
+        
+        
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.blue
+        renderer.lineWidth = 5.0
+        
+        return renderer
+    }
+    
+    
     //this method is used to prepare date in segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -311,6 +419,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         }
   
     }
+
    
     
     override func viewDidLoad() {
@@ -328,8 +437,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
             locationManager.distanceFilter = 100
             
             //ONCE REQUEST
-            locationManager.requestLocation()
-//            locationManager.startUpdatingLocation()
+//            locationManager.requestLocation()
+            locationManager.startUpdatingLocation()
             
         
             
