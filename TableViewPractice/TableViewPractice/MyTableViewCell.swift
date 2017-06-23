@@ -13,17 +13,40 @@ class MyTableViewCell: UITableViewCell {
     @IBOutlet weak var animalImageView: UIImageView!
     @IBOutlet weak var DistanceFromUserTextLabel: UILabel!
     @IBOutlet weak var levelOfFierceUIImageView: UIImageView!
-
+    @IBOutlet weak var animalsNameTextLabel: UILabel!
+    @IBOutlet weak var levelOfFierceImageView: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var animal:Animal?
+    {
+        didSet
+        {
+            self.updateUI()
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    private func updateUI()
+    {
+        let imageName = (animal?.name!)! + ".jpeg"
+        animalImageView.image = UIImage(named:imageName)
+        animalsNameTextLabel.text = animal?.name!
+        DistanceFromUserTextLabel.text = animal?.subtitle!
+        levelOfFierceImageView.image = self.checkStar()
+    }
+    
+    
+    func checkStar()->UIImage
+    {
+        var starImage = UIImage(named: "0Stars")
+        
+        let imageName = String((animal?.levelOfFirece)!) + "Stars"
+        
+        if let newImage = UIImage(named:imageName)
+        {
+            starImage = newImage
+        }
+        
+        return starImage!
+        
     }
 
 }

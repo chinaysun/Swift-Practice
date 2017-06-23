@@ -14,19 +14,16 @@ class Animal:NSObject,MKAnnotation
     //Basic Info
     var name:String?
     var animalDescription:String?
-    var typeOfAnimal:animalType?
+    var typeOfAnimal:String?
     var levelOfFirece:Double?
     
-    enum animalType {
-        case Pet
-        case Wild
-    }
+
     
     //Geo location Info
     var latitude:Double?
     var longitude:Double?
     
-    var distanceFromUserLocation:Double?
+    var distanceFromUserLocation:Double = 0.0
     
     
     //func for MKAnnotation
@@ -37,12 +34,21 @@ class Animal:NSObject,MKAnnotation
     
     var subtitle: String?
     {
-        return String(format:"%.2f M", self.distanceFromUserLocation!)
+        return String(format:"%.2f M", self.distanceFromUserLocation)
     }
     
     var coordinate: CLLocationCoordinate2D
     {
         return CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!)
+    }
+    
+    func calculateDistance(userLocation:CLLocation)
+    {
+        let destinationPoint = CLLocation(latitude: self.latitude!, longitude: self.longitude!)
+        
+        let distance = userLocation.distance(from: destinationPoint)
+        
+        self.distanceFromUserLocation = distance
     }
     
 }

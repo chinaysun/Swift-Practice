@@ -11,10 +11,7 @@
 		541B2D961EFB58CC0052086F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 541B2D941EFB58CC0052086F /* Main.storyboard */; };
 		541B2D981EFB58CC0052086F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 541B2D971EFB58CC0052086F /* Assets.xcassets */; };
 		541B2D9B1EFB58CC0052086F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 541B2D991EFB58CC0052086F /* LaunchScreen.storyboard */; };
-		541B2DA61EFB58CD0052086F /* TableViewPracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B2DA51EFB58CD0052086F /* TableViewPracticeTests.swift */; };
-		541B2DB11EFB58CD0052086F /* TableViewPracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B2DB01EFB58CD0052086F /* TableViewPracticeUITests.swift */; };
 		541B2DC01EFB7D520052086F /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B2DBF1EFB7D520052086F /* MyViewController.swift */; };
-		541B2DC21EFB7D720052086F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B2DC11EFB7D720052086F /* TableViewController.swift */; };
 		541B2DC51EFB89790052086F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541B2DC41EFB89790052086F /* MapKit.framework */; };
 		541B2DC71EFB89810052086F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541B2DC61EFB89810052086F /* CoreLocation.framework */; };
 		541B2DC91EFB90550052086F /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B2DC81EFB90550052086F /* MyTableViewCell.swift */; };
@@ -24,6 +21,7 @@
 		541B2DD21EFB96240052086F /* Dog.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 541B2DD01EFB96240052086F /* Dog.jpeg */; };
 		541B2DD31EFB96240052086F /* Cat.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 541B2DD11EFB96240052086F /* Cat.jpeg */; };
 		541B2DD61EFB96C30052086F /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B2DD51EFB96C30052086F /* Animal.swift */; };
+		541B2DDA1EFD3A3F0052086F /* AnimalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B2DD91EFD3A3F0052086F /* AnimalDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,13 +49,8 @@
 		541B2D9A1EFB58CC0052086F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		541B2D9C1EFB58CC0052086F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		541B2DA11EFB58CD0052086F /* TableViewPracticeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableViewPracticeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		541B2DA51EFB58CD0052086F /* TableViewPracticeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewPracticeTests.swift; sourceTree = "<group>"; };
-		541B2DA71EFB58CD0052086F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		541B2DAC1EFB58CD0052086F /* TableViewPracticeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableViewPracticeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		541B2DB01EFB58CD0052086F /* TableViewPracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewPracticeUITests.swift; sourceTree = "<group>"; };
-		541B2DB21EFB58CD0052086F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		541B2DBF1EFB7D520052086F /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
-		541B2DC11EFB7D720052086F /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		541B2DC41EFB89790052086F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		541B2DC61EFB89810052086F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		541B2DC81EFB90550052086F /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
@@ -67,6 +60,7 @@
 		541B2DD01EFB96240052086F /* Dog.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dog.jpeg; sourceTree = "<group>"; };
 		541B2DD11EFB96240052086F /* Cat.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Cat.jpeg; sourceTree = "<group>"; };
 		541B2DD51EFB96C30052086F /* Animal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
+		541B2DD91EFD3A3F0052086F /* AnimalDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				541B2D8F1EFB58CC0052086F /* TableViewPractice */,
-				541B2DA41EFB58CD0052086F /* TableViewPracticeTests */,
-				541B2DAF1EFB58CD0052086F /* TableViewPracticeUITests */,
 				541B2D8E1EFB58CC0052086F /* Products */,
 				541B2DC31EFB89790052086F /* Frameworks */,
 			);
@@ -126,27 +118,9 @@
 				541B2DD51EFB96C30052086F /* Animal.swift */,
 				541B2DC81EFB90550052086F /* MyTableViewCell.swift */,
 				541B2DBF1EFB7D520052086F /* MyViewController.swift */,
-				541B2DC11EFB7D720052086F /* TableViewController.swift */,
+				541B2DD91EFD3A3F0052086F /* AnimalDetail.swift */,
 			);
 			path = TableViewPractice;
-			sourceTree = "<group>";
-		};
-		541B2DA41EFB58CD0052086F /* TableViewPracticeTests */ = {
-			isa = PBXGroup;
-			children = (
-				541B2DA51EFB58CD0052086F /* TableViewPracticeTests.swift */,
-				541B2DA71EFB58CD0052086F /* Info.plist */,
-			);
-			path = TableViewPracticeTests;
-			sourceTree = "<group>";
-		};
-		541B2DAF1EFB58CD0052086F /* TableViewPracticeUITests */ = {
-			isa = PBXGroup;
-			children = (
-				541B2DB01EFB58CD0052086F /* TableViewPracticeUITests.swift */,
-				541B2DB21EFB58CD0052086F /* Info.plist */,
-			);
-			path = TableViewPracticeUITests;
 			sourceTree = "<group>";
 		};
 		541B2DBE1EFB59220052086F /* Supporting Files */ = {
@@ -324,8 +298,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				541B2DC01EFB7D520052086F /* MyViewController.swift in Sources */,
+				541B2DDA1EFD3A3F0052086F /* AnimalDetail.swift in Sources */,
 				541B2DC91EFB90550052086F /* MyTableViewCell.swift in Sources */,
-				541B2DC21EFB7D720052086F /* TableViewController.swift in Sources */,
 				541B2D911EFB58CC0052086F /* AppDelegate.swift in Sources */,
 				541B2DD61EFB96C30052086F /* Animal.swift in Sources */,
 			);
@@ -335,7 +309,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				541B2DA61EFB58CD0052086F /* TableViewPracticeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +316,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				541B2DB11EFB58CD0052086F /* TableViewPracticeUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +552,7 @@
 				541B2DB71EFB58CD0052086F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		541B2DB81EFB58CD0052086F /* Build configuration list for PBXNativeTarget "TableViewPracticeTests" */ = {
 			isa = XCConfigurationList;
@@ -588,6 +561,7 @@
 				541B2DBA1EFB58CD0052086F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		541B2DBB1EFB58CD0052086F /* Build configuration list for PBXNativeTarget "TableViewPracticeUITests" */ = {
 			isa = XCConfigurationList;
@@ -596,6 +570,7 @@
 				541B2DBD1EFB58CD0052086F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
