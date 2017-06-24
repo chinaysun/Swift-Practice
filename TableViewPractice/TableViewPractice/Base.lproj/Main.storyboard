@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -36,50 +35,35 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="157"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hhq-GG-q4l" id="btn-9r-ifE">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="156.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="157"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D5-k9-h78">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D5-k9-h78">
                                                     <rect key="frame" x="250.5" y="53" width="63.5" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lb8-3f-rwo">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lb8-3f-rwo">
                                                     <rect key="frame" x="194" y="86" width="120" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="wRr-Dc-Blb"/>
                                                         <constraint firstAttribute="width" constant="120" id="xAz-xW-zsq"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Animal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fhr-XK-bXL">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of Animal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fhr-XK-bXL">
                                                     <rect key="frame" x="193" y="24" width="121" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="srE-5l-I9q">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srE-5l-I9q">
                                                     <rect key="frame" x="9" y="11" width="177" height="134"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="134" id="ESv-R8-xit"/>
-                                                        <constraint firstAttribute="width" constant="177" id="Sme-XJ-Z7s"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="lb8-3f-rwo" secondAttribute="bottom" constant="33" id="0yK-Q3-9hm"/>
-                                                <constraint firstItem="4D5-k9-h78" firstAttribute="top" secondItem="Fhr-XK-bXL" secondAttribute="bottom" constant="8" id="4Ng-yt-eav"/>
-                                                <constraint firstItem="srE-5l-I9q" firstAttribute="leading" secondItem="btn-9r-ifE" secondAttribute="leadingMargin" constant="1" id="GWx-g7-FTC"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="srE-5l-I9q" secondAttribute="bottom" constant="4" id="TAm-aw-D2A"/>
-                                                <constraint firstItem="Fhr-XK-bXL" firstAttribute="top" secondItem="btn-9r-ifE" secondAttribute="topMargin" constant="16" id="TwC-X9-Lap"/>
-                                                <constraint firstItem="lb8-3f-rwo" firstAttribute="top" secondItem="4D5-k9-h78" secondAttribute="bottom" constant="13" id="XNS-k4-XTA"/>
-                                                <constraint firstItem="srE-5l-I9q" firstAttribute="top" secondItem="btn-9r-ifE" secondAttribute="topMargin" constant="3" id="dM7-ve-4sH"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="4D5-k9-h78" secondAttribute="trailing" constant="20" id="hl2-1H-3mK"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="lb8-3f-rwo" secondAttribute="trailing" constant="20" id="iWd-Bz-eWo"/>
-                                                <constraint firstItem="4D5-k9-h78" firstAttribute="top" secondItem="Fhr-XK-bXL" secondAttribute="bottom" constant="8" id="jc1-1H-5Wj"/>
-                                                <constraint firstItem="lb8-3f-rwo" firstAttribute="top" secondItem="4D5-k9-h78" secondAttribute="bottom" constant="13" id="vmv-gA-Ipl"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Fhr-XK-bXL" secondAttribute="trailing" constant="20" id="xBm-zn-Prw"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="DistanceFromUserTextLabel" destination="4D5-k9-h78" id="88W-Ts-B2F"/>

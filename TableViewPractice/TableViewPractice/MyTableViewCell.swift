@@ -30,7 +30,7 @@ class MyTableViewCell: UITableViewCell {
         animalImageView.image = UIImage(named:imageName)
         animalsNameTextLabel.text = animal?.name!
         DistanceFromUserTextLabel.text = animal?.subtitle!
-        levelOfFierceImageView.image = self.checkStar()
+        //levelOfFierceImageView.image = self.checkStar()
     }
     
     

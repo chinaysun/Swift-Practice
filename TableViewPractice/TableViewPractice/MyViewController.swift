@@ -38,23 +38,35 @@ class MyViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        self.loadData()
-        
-        // add annotations into map
-        for animal in self.myAnimalData
-        {
-            myMapView.addAnnotations(animal.animalList)
-        }
         
         //get current location
         self.createCLManager()
+        
+        // Do any additional setup after loading the view.
+        self.loadData()
+        
+    
+        // add annotations into map
+        for animalType in self.myAnimalData
+        {
+            //add annotations
+            myMapView.addAnnotations(animalType.animalList)
+            
+            //start to monitor the points
+            for animal in animalType.animalList
+            {
+                self.startMonitoring(animal: animal)
+            }
+            
+        }
+        
         
         
     }
     
     /* MARK: - CL Functions
      */
+    
     private func createCLManager()
     {
         //initial the delegate
@@ -129,6 +141,67 @@ class MyViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
         
     }
     
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Some error Occur block the location service")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print("Fail to monitor region")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("The user entry the")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        print("The user exist the area")
+    }
+    
+    func region(animalArea animal:Animal)->CLCircularRegion
+    {
+        let region = CLCircularRegion(center: animal.coordinate, radius: 50.0, identifier: animal.name!)
+        
+        //only notify when user entry
+        region.notifyOnEntry = true
+        region.notifyOnExit = false
+        
+        return region
+    }
+    
+    
+    func startMonitoring(animal:Animal)
+    {
+        
+        
+        //check weather supports
+        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self)
+        {
+            print("Your device does not support this function")
+        }
+        
+        print("start Monitoring")
+        
+        let region = self.region(animalArea: animal)
+        
+        self.myCLManager.startMonitoring(for: region)
+        
+    }
+    
+    func stopMonitoring(animal:Animal)
+    {
+        for region in self.myCLManager.monitoredRegions
+        {
+            guard let circularRegion = region as? CLCircularRegion , circularRegion.identifier == animal.name!
+            else
+            {
+                continue
+            }
+            
+            self.myCLManager.stopMonitoring(for: region)
+        }
+    }
+    
     func createAlertForSetting()
     {
         let alert = UIAlertController(title: "Notification", message: "Please allow us to use your location", preferredStyle: UIAlertControllerStyle.alert)
@@ -158,8 +231,6 @@ class MyViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
         present(alert, animated: true, completion: nil)
     }
     
-    /* MARK: - CL Functions End
-     */
     
     /* MARK: - MAP Functions
      */
@@ -178,7 +249,63 @@ class MyViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     
-    /* MARK: - MAP Functions End
+    //This function is invoked every time the user zooms in/out
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        var overlays:[MKOverlay]?
+        
+        //add circle for each point
+        //let radius = max(10.0,1000.0*mapView.region.span.latitudeDelta,1000.0*mapView.region.span.latitudeDelta)
+        let radius = 50.0
+        
+        
+        overlays = mapView.overlays
+        
+        if overlays?.count == 0
+        {
+        
+            for animalType in self.myAnimalData
+            {
+                for animal in animalType.animalList
+                {
+                    self.createRadar(center: animal.coordinate, radius: radius)
+                }
+            }
+            
+            return
+        }
+        
+        mapView.removeOverlays(overlays!)
+        
+        for overlay in overlays!
+        {
+            self.createRadar(center: overlay.coordinate, radius: radius)
+            
+        }
+        
+        
+        
+    }
+    
+    
+    func createRadar(center:CLLocationCoordinate2D,radius:CLLocationDistance)
+    {
+        let circle = MKCircle(center: center, radius: radius)
+        
+        self.myMapView.add(circle)
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let circleRenderer = MKCircleRenderer.init(overlay: overlay)
+        circleRenderer.fillColor = UIColor.purple
+        circleRenderer.alpha = 0.5
+        
+        return circleRenderer
+    }
+    
+    
+    /* MARK: - General Functions
      */
     
     
