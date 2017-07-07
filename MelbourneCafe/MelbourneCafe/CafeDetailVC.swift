@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CafeDetailVC: UIViewController {
+class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
     var cafe:Cafe!
     var previousFavoriteStatus:Int!
@@ -19,6 +19,7 @@ class CafeDetailVC: UIViewController {
     @IBOutlet weak var cafeDescriptionTextLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var navigationTitle: UINavigationItem!
+    @IBOutlet weak var cafeProductCollectionView: UICollectionView!
     
     
     var userID:String?
@@ -33,13 +34,25 @@ class CafeDetailVC: UIViewController {
         {
             self.cafe.updateFaviouriteInfo(userID: self.userID!)
         }
+        
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.cafe.productCategory.removeAll()
+    }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         
         self.updateCafeInfoUIWhenLoad()
-        
+    
         self.checkUserFavoriteCafeList()
+        
+        self.downloadCafeProductList()
+        
+        
+    
     }
     
     func updateCafeInfoUIWhenLoad()
@@ -81,6 +94,56 @@ class CafeDetailVC: UIViewController {
         self.previousFavoriteStatus = cafe.favorite
     }
     
+    func downloadCafeProductList()
+    {
+        self.cafe.getProductList(complication: { self.cafeProductCollectionView.reloadData() })
+        
+    }
+    
+    
+    //MARK:- UICollection View
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cafeProduct", for: indexPath)
+        
+
+            if let productCell = cell as? CafeProductCVC
+            {
+                
+                if indexPath.row < self.cafe.productCategory.count
+                {
+                    productCell.productType = self.cafe.productCategory[indexPath.row]
+                                
+                }
+                
+            }
+
+        return cell
+        
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.row < self.cafe.productCategory.count
+        {
+            self.selectedProduct = self.cafe.productCategory[indexPath.row].0
+            performSegue(withIdentifier: self.goToProductDetail, sender: self)
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 130)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 
     
     //MARK:- UIButtons Function
@@ -125,6 +188,28 @@ class CafeDetailVC: UIViewController {
         
 
     }
+    
+    // MARK: - Navigation
+    
+    var goToProductDetail = "showProduct"
+    var selectedProduct = ""
+
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == self.goToProductDetail
+        {
+            let destinationView:ProductDetailVC = segue.destination as! ProductDetailVC
+            destinationView.selectedProductType = self.selectedProduct
+            
+        }
+        
+        
+        
+    }
+    
+    
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         
