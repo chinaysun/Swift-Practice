@@ -30,6 +30,11 @@ class CafeProductCVC: UICollectionViewCell
             productImageView.alpha = 1.0
             productTextLabel.text = String((productType?.1)!) + " kinds of " + (self.productType?.0)! + " available"
             
+        }else
+        {
+            productImageView.image = UIImage(named: "moreProduct")
+            productImageView.alpha = 0.6
+            productTextLabel.text = "More Product is coming"
         }
         
     }

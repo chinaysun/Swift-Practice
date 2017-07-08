@@ -38,7 +38,7 @@ class Cafe:NSObject
     var downloadErrorInfo:String?
     
     
-    //check for favorite
+    //MARK:- Favorite Functions check for favorite
     func checkForFavorite(userID:String,complication:@escaping ()->())
     {
         let parameter:Parameters = [
@@ -147,6 +147,7 @@ class Cafe:NSObject
         
     }
     
+       
     
 
 }
