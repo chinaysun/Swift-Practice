@@ -172,7 +172,7 @@ class CafeManager
                                 {
                                     cafe.name = name
                                 }
-                                if let star = cafeInfo.value(forKey: "Star") as? Int
+                                if let star = cafeInfo.value(forKey: "Star") as? Double
                                 {
                                     cafe.star = String(star)
                                 }

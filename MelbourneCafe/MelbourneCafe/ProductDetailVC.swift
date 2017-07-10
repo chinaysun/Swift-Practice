@@ -21,7 +21,9 @@ class ProductDetailVC: UIViewController,UICollectionViewDataSource,UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBar.title = productManager.selectedType!.0
-
+        productManager.downloadDisplayProductInfo(complication:{
+            print("Basic Info download Successfully")
+            self.productCollectionView.reloadData()})
 
     }
 
@@ -46,8 +48,22 @@ class ProductDetailVC: UIViewController,UICollectionViewDataSource,UICollectionV
         
         if let productCell = cell as? ProductCVC
         {
+            if productManager.displayedProducts.count > 0
+            {
+                let product =  self.productManager.displayedProducts[indexPath.row]
+                
+                self.productManager.downloadProductImage(product: product, complication:
+                {
+                    
+                    productCell.product = product
+                    
+                
+                })
+                
+                
+            }
             
-            productCell.product = Product()
+            
         }
         
         return cell

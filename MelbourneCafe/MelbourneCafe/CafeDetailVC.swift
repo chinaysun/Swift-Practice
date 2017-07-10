@@ -12,6 +12,7 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
 
     var cafe:Cafe!
     var previousFavoriteStatus:Int!
+    var productManager:ProductManager!
     
     @IBOutlet weak var cafeProfileImageView: UIImageView!
     @IBOutlet weak var cafeABNTextLabel: UILabel!
@@ -35,14 +36,11 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
             self.cafe.updateFaviouriteInfo(userID: self.userID!)
         }
         
+        self.productManager.productCategory.removeAll()
+        
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        self.cafe.productCategory.removeAll()
-    }
-    
-    
-    
+
     override func viewDidAppear(_ animated: Bool) {
         
         self.updateCafeInfoUIWhenLoad()
@@ -53,6 +51,15 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         
         
     
+    }
+    
+    override func viewDidLoad() {
+        
+        if self.productManager == nil
+        {
+            self.productManager = ProductManager.init(shopID: self.cafe.shopID)
+        }
+        
     }
     
     func updateCafeInfoUIWhenLoad()
@@ -96,7 +103,7 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     
     func downloadCafeProductList()
     {
-        self.cafe.getProductList(complication: { self.cafeProductCollectionView.reloadData() })
+        self.productManager.getProductList(complication: { self.cafeProductCollectionView.reloadData() })
         
     }
     
@@ -110,17 +117,24 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cafeProduct", for: indexPath)
         
+        if indexPath.row < self.productManager.productCategory.count
+        {
+            
 
             if let productCell = cell as? CafeProductCVC
             {
-                
-                if indexPath.row < self.cafe.productCategory.count
-                {
-                    productCell.productType = self.cafe.productCategory[indexPath.row]
-                                
-                }
-                
+                productCell.productType = self.productManager.productCategory[indexPath.row]
             }
+            
+                
+        }else
+        {
+            if let productCell = cell as? CafeProductCVC
+            {
+                productCell.productType = ("",0)
+            }
+            
+        }
 
         return cell
         
@@ -129,10 +143,15 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.row < self.cafe.productCategory.count
+        if indexPath.row < self.productManager.productCategory.count
         {
-            self.selectedProduct = self.cafe.productCategory[indexPath.row].0
-            performSegue(withIdentifier: self.goToProductDetail, sender: self)
+            let numberOfProduct = self.productManager.productCategory[indexPath.row].1
+            
+            if numberOfProduct > 0
+            {
+                self.productManager.selectedType = self.productManager.productCategory[indexPath.row]
+                performSegue(withIdentifier: self.goToProductDetail, sender: self)
+            }
         }
         
     }
@@ -192,7 +211,6 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     // MARK: - Navigation
     
     var goToProductDetail = "showProduct"
-    var selectedProduct = ""
 
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -201,7 +219,7 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         if segue.identifier == self.goToProductDetail
         {
             let destinationView:ProductDetailVC = segue.destination as! ProductDetailVC
-            destinationView.selectedProductType = self.selectedProduct
+            destinationView.productManager = self.productManager
             
         }
         

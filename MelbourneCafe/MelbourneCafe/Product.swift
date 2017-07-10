@@ -14,13 +14,7 @@ class Product
     var productID:Int = 0
     var name:String = ""
     var imageURL:String = ""
-    var productImage:UIImage!
-    {
-        get
-        {
-            return (UIImage(named: "defaultProfileImage"))!
-        }
-    }
+    var productImage:UIImage = UIImage(named: "defaultProfileImage")!
     var price: Double = 0.0
     
 }

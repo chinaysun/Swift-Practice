@@ -18,19 +18,8 @@ class Coffee: Product
         case Large
     }
     
-    var availableSize = [Size]()
-    private var _productImage:UIImage?
-    private var priceForDiffSize = [Size:Double]()
+    var priceForDiffSize = [Size:Double]()
     
-    override var productImage: UIImage
-    {
-        if _productImage != nil
-        {
-            return self._productImage!
-        }
-        
-        return (UIImage(named: "defaultProfileImage"))!
-    }
     
     var size:Size?
     {
@@ -38,6 +27,7 @@ class Coffee: Product
         {
             //when set change the price
             self.price = self.priceForDiffSize[newValue!]!
+            
         }
         get
         {
@@ -54,25 +44,46 @@ class Coffee: Product
         self.name = name
         self.imageURL = imageURL
         
-        //for coffee price bases on size
-        self.generatePrice(priceList: priceList)
-        
     }
     
-    private func generatePrice(priceList:[Size:Double])
-    {
+    init(productInfo:NSDictionary) {
         
+        super.init()
         
-        for (size,price) in priceList
+        if let productID = productInfo.value(forKey: "ProductID") as? String
         {
-            if price != 0.0
-            {
-                self.availableSize.append(size)
-                self.priceForDiffSize[size] = price
-            }
+            self.productID = Int(productID)!
+        }
+        
+        if let productName = productInfo.value(forKey: "ProductName") as? String
+        {
+            self.name = productName
             
         }
         
+        if let imageURL = productInfo.value(forKey: "ImageUrl") as? String
+        {
+            self.imageURL = imageURL
+   
+        }
+        
+        if let mediumPrice = productInfo.value(forKey: "MediumSizePrice") as? String, let smallPrice = productInfo.value(forKey: "SmallSizePrice") as? String, let LargePrice = productInfo.value(forKey: "LargeSizePrice") as? String
+        {
+            let priceList:[Size:Double] = [
+                Size.Small:Double(smallPrice)!,
+                Size.Medium:Double(mediumPrice)!,
+                Size.Large:Double(LargePrice)!
+            ]
+            
+            self.priceForDiffSize = priceList
+            
+            
+        }
+        
+        
     }
+    
+    
+
     
 }

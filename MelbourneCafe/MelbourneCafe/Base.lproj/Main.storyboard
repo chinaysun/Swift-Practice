@@ -196,8 +196,64 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jri-OM-y3o">
+                                <rect key="frame" x="0.0" y="232" width="375" height="435"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.9396862587" green="0.99232357739999999" blue="0.82856334610000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2Pi-If-eIz">
+                                    <size key="itemSize" width="375" height="130"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cafeProduct" id="rQb-gz-SC0" customClass="CafeProductCVC" customModule="MelbourneCafe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gnD-HX-l5S">
+                                                    <rect key="frame" x="0.0" y="128" width="375" height="2"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                                <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="moreProduct" translatesAutoresizingMaskIntoConstraints="NO" id="2Hj-LT-hzx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="More product is coming soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xop-8q-Upg">
+                                                    <rect key="frame" x="0.0" y="89" width="375" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.024608530104160309" green="0.76947176456451416" blue="0.93993419408798218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <size key="customSize" width="375" height="130"/>
+                                        <connections>
+                                            <outlet property="productImageView" destination="2Hj-LT-hzx" id="WSp-3b-5si"/>
+                                            <outlet property="productTextLabel" destination="Xop-8q-Upg" id="cBQ-S2-6BY"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="edj-nE-ght" id="Rh6-oB-kyr"/>
+                                    <outlet property="delegate" destination="edj-nE-ght" id="8Mf-Wk-GIN"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="# ppl. like this Cafe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnn-hN-qI2">
+                                <rect key="frame" x="16" y="200" width="151" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                <color key="textColor" red="0.024608530104160309" green="0.76947176456451416" blue="0.93993419408798218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wp0-bg-veS">
-                                <rect key="frame" x="144" y="202" width="25" height="22"/>
+                                <rect key="frame" x="175" y="199" width="25" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="dislike"/>
                                 <connections>
@@ -211,14 +267,125 @@
                         <outlet property="cafeABNTextLabel" destination="3O5-I3-FRu" id="QBc-0H-G70"/>
                         <outlet property="cafeDescriptionTextLabel" destination="XIR-Xg-cdJ" id="wA8-kN-8Fd"/>
                         <outlet property="cafePhTextLabel" destination="H7K-6M-BKu" id="VY0-77-784"/>
+                        <outlet property="cafeProductCollectionView" destination="jri-OM-y3o" id="zW8-za-TXf"/>
                         <outlet property="cafeProfileImageView" destination="EGC-0h-nZ8" id="Rpe-h7-Xfx"/>
                         <outlet property="likeButton" destination="Wp0-bg-veS" id="cJU-3I-khi"/>
                         <outlet property="navigationTitle" destination="Rx3-sn-Qxt" id="rLC-bh-haa"/>
+                        <segue destination="eYV-gb-vDM" kind="show" identifier="showProduct" id="eMP-IC-ZFq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TE8-5l-2N5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-924" y="432"/>
+            <point key="canvasLocation" x="-924" y="431.33433283358323"/>
+        </scene>
+        <!--productDetail-->
+        <scene sceneID="hLu-PO-Cd7">
+            <objects>
+                <viewController title="productDetail" id="eYV-gb-vDM" customClass="ProductDetailVC" customModule="MelbourneCafe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7QA-Eb-dHQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="QBR-fr-Lcz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q5e-m1-uGm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DJm-cf-g5I">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.98918535060000001" green="1" blue="0.66292811500000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Title" id="cyi-Z4-ePd">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Ysh-Bk-Cpm">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="eYV-gb-vDM" id="11i-kE-G7S"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CYJ-bY-4Cb">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.9416199327" green="0.99104791879999998" blue="0.82873415949999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yq6-LW-v1w">
+                                    <size key="itemSize" width="150" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="productItem" id="8tG-tQ-Sqs" customClass="ProductCVC" customModule="MelbourneCafe" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="10" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="O03-iu-8BB">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                </imageView>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8at-qJ-lnG">
+                                                    <rect key="frame" x="0.0" y="120" width="150" height="30"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Crk-qb-CQI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="fEb-f6-L7b">
+                                                                <rect key="frame" x="8" y="6" width="134" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="20" id="el8-S3-kDb"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="fEb-f6-L7b" firstAttribute="top" secondItem="Crk-qb-CQI" secondAttribute="top" constant="6" id="0Nn-Ad-u1c"/>
+                                                            <constraint firstItem="fEb-f6-L7b" firstAttribute="leading" secondItem="Crk-qb-CQI" secondAttribute="leading" constant="8" id="Cmg-3L-Ggk"/>
+                                                            <constraint firstAttribute="bottom" secondItem="fEb-f6-L7b" secondAttribute="bottom" constant="4" id="NEJ-vh-PYZ"/>
+                                                            <constraint firstAttribute="trailing" secondItem="fEb-f6-L7b" secondAttribute="trailing" constant="8" id="gdz-wP-2UK"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="EkB-KN-f1d"/>
+                                                    </constraints>
+                                                    <blurEffect style="extraLight"/>
+                                                </visualEffectView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="O03-iu-8BB" firstAttribute="top" secondItem="8tG-tQ-Sqs" secondAttribute="top" id="HA6-nM-KUI"/>
+                                            <constraint firstItem="8at-qJ-lnG" firstAttribute="leading" secondItem="8tG-tQ-Sqs" secondAttribute="leading" id="KPX-Xe-kbR"/>
+                                            <constraint firstAttribute="bottom" secondItem="8at-qJ-lnG" secondAttribute="bottom" id="ZsU-OB-ifD"/>
+                                            <constraint firstAttribute="trailing" secondItem="O03-iu-8BB" secondAttribute="trailing" id="bul-h0-kfE"/>
+                                            <constraint firstAttribute="bottom" secondItem="O03-iu-8BB" secondAttribute="bottom" id="d7h-8I-SNn"/>
+                                            <constraint firstAttribute="trailing" secondItem="8at-qJ-lnG" secondAttribute="trailing" id="geo-WM-c80"/>
+                                            <constraint firstItem="O03-iu-8BB" firstAttribute="leading" secondItem="8tG-tQ-Sqs" secondAttribute="leading" id="rvM-cB-a6c"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="productImageView" destination="O03-iu-8BB" id="aNu-Jp-qvR"/>
+                                            <outlet property="productNameTextLabel" destination="fEb-f6-L7b" id="5UV-1c-ffv"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="eYV-gb-vDM" id="47r-AN-lXp"/>
+                                    <outlet property="delegate" destination="eYV-gb-vDM" id="uW0-7h-X55"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="navigationBar" destination="cyi-Z4-ePd" id="MMA-64-VBd"/>
+                        <outlet property="productCollectionView" destination="CYJ-bY-4Cb" id="Ffx-qa-Yl2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="beN-FH-23K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-176.80000000000001" y="431.33433283358323"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="UTf-5U-ahP">
@@ -1307,23 +1474,6 @@
             </objects>
             <point key="canvasLocation" x="-4273" y="432"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="EZC-g0-XuQ">
-            <objects>
-                <tabBarController id="jks-jd-snQ" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="Id4-fH-sIO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Qjl-LS-NvB" kind="relationship" relationship="viewControllers" id="GiD-JA-RCT"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jjb-cA-8UE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="226" y="98"/>
-        </scene>
     </scenes>
     <resources>
         <image name="ClosedEye" width="35" height="35"/>
@@ -1331,11 +1481,13 @@
         <image name="Password" width="35" height="35"/>
         <image name="UnCheckBox" width="100" height="100"/>
         <image name="UserAccount" width="35" height="35"/>
+        <image name="defaultProfileImage" width="125" height="125"/>
         <image name="dislike" width="30" height="30"/>
         <image name="like" width="30" height="30"/>
+        <image name="moreProduct" width="275" height="183"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KDA-sG-e5z"/>
         <segue reference="PmB-pH-nBW"/>
+        <segue reference="nde-Ty-BCE"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -35,6 +35,8 @@ let CAFE_GEO_LOCATION_LIST_URL = SERVER_URL + "CafeGeoLocationInfoGetting.php"
 
 // Method POST - CAFE
 let CAFE_INFO_URL = SERVER_URL + "CafeGetInfo.php"
+let CAFE_PRODUCT_LIST_URL = SERVER_URL + "CafeGetProductList.php"
+let CAFE_DISPLAY_PRODUCT_INFO = SERVER_URL + "CafeProductDisplay.php"
 
 
 

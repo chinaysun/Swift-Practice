@@ -25,7 +25,11 @@ class ProductCVC: UICollectionViewCell
     
     private func updateUI()
     {
+        print("Start to update")
+        self.productNameTextLabel.text = product?.name
+        self.productImageView.image = product?.productImage
         self.roundTheImage()
+        
     }
     
     private func roundTheImage()
