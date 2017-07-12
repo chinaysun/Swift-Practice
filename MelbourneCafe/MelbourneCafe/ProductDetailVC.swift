@@ -22,7 +22,7 @@ class ProductDetailVC: UIViewController,UICollectionViewDataSource,UICollectionV
         super.viewDidLoad()
         navigationBar.title = productManager.selectedType!.0
         productManager.downloadDisplayProductInfo(complication:{
-            print("Basic Info download Successfully")
+            //print("Basic Info download Successfully")
             self.productCollectionView.reloadData()})
 
     }
