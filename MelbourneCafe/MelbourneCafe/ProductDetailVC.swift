@@ -83,6 +83,26 @@ class ProductDetailVC: UIViewController,UICollectionViewDataSource,UICollectionV
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.selectedProduct = self.productManager.displayedProducts[indexPath.row]
+        self.performSegue(withIdentifier: self.nextPage, sender: self)
+    }
+   
+    
+    //MARK:- Navigation
+    var nextPage = "makeOrder"
+    var selectedProduct:Product?
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == nextPage
+        {
+            let destinationView:OrderVC = segue.destination as! OrderVC
+            
+            destinationView.selectedProduct = self.selectedProduct!
+        }
+    }
 
     
 

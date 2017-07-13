@@ -18,7 +18,25 @@ class Coffee: Product
         case Large
     }
     
-    var priceForDiffSize = [Size:Double]()
+    private var _priceForDiffSize = [Size:Double]()
+    
+    var priceForDiffSize:[Size:Double]
+    {
+      get
+      {
+            return self._priceForDiffSize
+      }
+    }
+    
+    private var _availableSize = [String]()
+    
+    var availableSize:[String]
+    {
+        get
+        {
+            return self._availableSize
+        }
+    }
     
     
     var size:Size?
@@ -61,6 +79,11 @@ class Coffee: Product
             
         }
         
+        if let shopID = productInfo.value(forKey: "ShopID") as? String
+        {
+            self.shopID = Int(shopID)!
+        }
+        
         if let imageURL = productInfo.value(forKey: "ImageUrl") as? String
         {
             self.imageURL = imageURL
@@ -75,13 +98,53 @@ class Coffee: Product
                 Size.Large:Double(LargePrice)!
             ]
             
-            self.priceForDiffSize = priceList
+            for item in priceList
+            {
+                if item.value != 0.0
+                {
+                    
+                    self._priceForDiffSize[item.key] = item.value
+                    
+                }
+            }
+            
+            if smallPrice != "0.0"
+            {
+                self._availableSize.append("Small")
+            }
+            
+            if mediumPrice != "0.0"
+            {
+                self._availableSize.append("Medium")
+            }
+            
+            if LargePrice != "0.0"
+            {
+                self._availableSize.append("Large")
+            }
+            
+            let initialSize = self._availableSize[0]
+            
+            switch initialSize
+            {
+                case "Small":
+                    self.size = Size.Small
+                case "Medium":
+                    self.size = Size.Medium
+                case "Large":
+                    self.size = Size.Large
+                default:
+                    break
+            }
             
             
         }
         
         
     }
+
+    
+    
     
     
 
