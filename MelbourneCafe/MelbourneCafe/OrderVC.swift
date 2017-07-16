@@ -37,6 +37,16 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
             self.sugarTextLabel.text = String(self.sugar)
         }
     }
+    
+    private var selectedSize:String = ""
+    {
+        didSet
+        {
+            self.quantityTextLabel.text = String(self.quantity)
+            self.totalPriceTextLabel.text = "$ " + String( Double(self.quantity ) * self.selectedProduct.price)
+
+        }
+    }
 
     
     //MARK:- View Life Cycle
@@ -117,7 +127,7 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
                     break
             }
             
-            print(coffee.price)
+            self.selectedSize = coffee.availableSize[row]
         }
     }
     

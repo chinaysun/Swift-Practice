@@ -100,6 +100,7 @@ class Coffee: Product
             
             for item in priceList
             {
+                
                 if item.value != 0.0
                 {
                     
@@ -108,22 +109,28 @@ class Coffee: Product
                 }
             }
             
-            if smallPrice != "0.0"
+            
+            
+            if smallPrice != "0.00"
             {
+                
                 self._availableSize.append("Small")
             }
             
-            if mediumPrice != "0.0"
+            
+        
+            if mediumPrice != "0.00"
             {
                 self._availableSize.append("Medium")
             }
             
-            if LargePrice != "0.0"
+            if LargePrice != "0.00"
             {
                 self._availableSize.append("Large")
             }
             
             let initialSize = self._availableSize[0]
+            
             
             switch initialSize
             {
@@ -136,6 +143,8 @@ class Coffee: Product
                 default:
                     break
             }
+            
+            
             
             
         }
