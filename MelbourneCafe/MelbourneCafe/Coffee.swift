@@ -41,15 +41,11 @@ class Coffee: Product
     
     var size:Size?
     {
-        set
+        didSet
         {
             //when set change the price
-            self.price = self.priceForDiffSize[newValue!]!
+            self.price = self.priceForDiffSize[self.size!]!
             
-        }
-        get
-        {
-            return self.size
         }
     }
 
@@ -129,33 +125,32 @@ class Coffee: Product
                 self._availableSize.append("Large")
             }
             
-            let initialSize = self._availableSize[0]
-            
-            
-            switch initialSize
-            {
-                case "Small":
-                    self.size = Size.Small
-                case "Medium":
-                    self.size = Size.Medium
-                case "Large":
-                    self.size = Size.Large
-                default:
-                    break
-            }
-            
-            
-            
             
         }
         
+        self.initialSize()
         
+        
+    }
+    
+    private func initialSize()
+    {
+        let _initialSize = self._availableSize[0]
+        
+        
+        switch _initialSize
+        {
+        case "Small":
+            self.size = Size.Small
+        case "Medium":
+            self.size = Size.Medium
+        case "Large":
+            self.size = Size.Large
+        default:
+            break
+        }
     }
 
     
-    
-    
-    
-
     
 }

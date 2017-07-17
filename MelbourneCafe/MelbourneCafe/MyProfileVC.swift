@@ -154,9 +154,7 @@ class MyProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         if !checkLogginStatus
         {
             // Go to login first
-            let alert = UIAlertController(title: "Notice", message: "Please Login", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in self.performSegue(withIdentifier: "UserLoginView",sender: self) }))
-            self.present(alert, animated: true, completion: nil)
+            self.goToLoginPageAlert()
             
         }else
         {

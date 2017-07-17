@@ -24,14 +24,14 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     
     
     var userID:String?
-    let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+    var isUserLoggedIn = false
     
     
     //MARK:- View Load/Appear/Disappear
     
     override func viewWillDisappear(_ animated: Bool) {
         //update the info to db
-        if self.cafe.favorite != self.previousFavoriteStatus
+        if self.cafe.favorite != self.previousFavoriteStatus && self.isUserLoggedIn
         {
             self.cafe.updateFaviouriteInfo(userID: self.userID!)
         }
@@ -75,6 +75,7 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     
     func checkUserFavoriteCafeList()
     {
+        self.isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
         
         if self.isUserLoggedIn
         {
@@ -87,18 +88,24 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     
     private func updateLikeButtonImage()
     {
-        switch cafe.favorite!
+        if isUserLoggedIn
         {
-        case 1:
-            self.likeButton.setBackgroundImage(UIImage(named:"like"), for: UIControlState.normal)
-        case 0:
-            self.likeButton.setBackgroundImage(UIImage(named:"dislike"), for: UIControlState.normal)
-        default:
-            break
+            switch cafe.favorite!
+            {
+                case 1:
+                    self.likeButton.setBackgroundImage(UIImage(named:"like"), for: UIControlState.normal)
+                case 0:
+                    self.likeButton.setBackgroundImage(UIImage(named:"dislike"), for: UIControlState.normal)
+                default:
+                    break
             
-        }
+            }
         
-        self.previousFavoriteStatus = cafe.favorite
+            self.previousFavoriteStatus = cafe.favorite
+        }else
+        {
+            self.goToLoginPageAlert()
+        }
     }
     
     func downloadCafeProductList()

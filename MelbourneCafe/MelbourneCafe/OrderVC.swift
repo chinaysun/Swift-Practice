@@ -17,7 +17,11 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     @IBOutlet weak var coffeeSpecialView: UIView!
     @IBOutlet weak var gapBetweenQuantityAndSpecialNote: NSLayoutConstraint!
     @IBOutlet weak var sugarTextLabel: UILabel!
-
+    @IBOutlet weak var specialNoteTextView: UITextView!
+    
+    @IBOutlet weak var specialNoteButton: UIButton!
+    var isSpecialNote = false
+    
     //received Variable
     var selectedProduct:Product!
     
@@ -50,6 +54,7 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
 
     
     //MARK:- View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -79,6 +84,9 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     {
         self.productImageView.image = selectedProduct.productImage
         self.productNameTextLabel.text = selectedProduct.name
+        
+        //hide the special note
+        self.specialNoteTextView.isHidden = true
         
     }
     
@@ -129,6 +137,8 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
             
             self.selectedSize = coffee.availableSize[row]
         }
+        
+        print(self.selectedSize)
     }
     
     
@@ -164,15 +174,116 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
         
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func specialNoteButtonTapped(_ sender: UIButton)
+    {
+        if !isSpecialNote
+        {
+            self.specialNoteTextView.isHidden = false
+            self.specialNoteButton.setBackgroundImage(UIImage(named:"CheckBox"), for: UIControlState.normal)
+            self.isSpecialNote = true
+            
+        }else
+        {
+            self.specialNoteTextView.text = "Please put your special  note here."
+            self.specialNoteTextView.isHidden = true
+            self.specialNoteButton.setBackgroundImage(UIImage(named:"UnCheckBox"), for: UIControlState.normal)
+            self.isSpecialNote = false
+        }
+        
     }
-    */
+
+    
+    @IBAction func addToCartButtonTapped(_ sender: UIButton)
+    {
+        let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+        
+        if isUserLoggedIn
+        {
+        
+            if self.quantity == 0
+            {
+                self.createAlert(withTitle: "Notification", message: "Please make sure how many items you would like to order")
+            
+            }else
+            {
+                var customerSpecialNote = self.specialNoteTextView.text
+            
+                if !self.isSpecialNote
+                {
+                    customerSpecialNote = ""
+                }
+            
+                var orderSugar = 0.0
+                var orderSize = ""
+            
+            
+            
+                if let coffee = self.selectedProduct as? Coffee
+                {
+                    orderSugar = self.sugar
+                
+                    let size = coffee.size!
+                
+                    switch size
+                    {
+                        case .Small:
+                            orderSize = "Small"
+                        case .Medium:
+                            orderSize = "Medium"
+                        case .Large:
+                            orderSize = "Large"
+                
+                    }
+                
+        
+              
+                }
+            
+                //create the orderItem
+                let orderItem = OrderItem(product: self.selectedProduct, quantity: self.quantity, specialNote: customerSpecialNote!, sugar: orderSugar, size: orderSize)
+            
+                let orderMessage = "You want to order\n" + orderItem.orderItemDescription
+            
+                self.createAlert(withTitle: "Notification", message: orderMessage)
+                
+                
+                //check if the cart exist
+                if let userID = UserDefaults.standard.object(forKey: "UserID") as! String?
+                {
+                    let referenceNumber = userID + "-" + String(self.selectedProduct.shopID)
+                    
+                    if let cartData = UserDefaults.standard.object(forKey: referenceNumber) as! Data?
+                    {
+                       if let cart = NSKeyedUnarchiver.unarchiveObject(with: cartData) as? Cart
+                       {
+                            cart.orderNewItem(newItem: orderItem)
+                        
+                       }
+                        
+                    }else
+                    {
+                        //create a new cart
+                        let cart = Cart(shopID: self.selectedProduct.shopID, userID: userID)
+                        cart.orderNewItem(newItem: orderItem)
+                        
+                        let data = NSKeyedArchiver.archivedData(withRootObject: cart)
+                        UserDefaults.standard.set(data, forKey: referenceNumber)
+                        UserDefaults.standard.synchronize()
+                        
+                    }
+                    
+                }
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            }
+        }else
+        {
+            self.goToLoginPageAlert()
+        }
+        
+        
+    }
+
 
 }
