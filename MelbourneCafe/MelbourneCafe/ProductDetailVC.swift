@@ -12,9 +12,14 @@ class ProductDetailVC: UIViewController,UICollectionViewDataSource,UICollectionV
 
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var productCollectionView: UICollectionView!
+    @IBOutlet weak var cartView: UIView!
+    @IBOutlet weak var quantityTextLabel: UILabel!
+    
     
     var productManager:ProductManager!
     
+    var isUserLoggedIn:Bool = false
+    var userID:String = ""
     
     //MARK:- View Controller Life Cycle
     
@@ -26,6 +31,24 @@ class ProductDetailVC: UIViewController,UICollectionViewDataSource,UICollectionV
             self.productCollectionView.reloadData()})
 
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        self.isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+        
+        if self.isUserLoggedIn
+        {
+            self.userID = UserDefaults.standard.object(forKey: "UserID") as! String
+            let referenceNumber = self.userID + "-" + String(self.productManager.shopID)
+            
+            self.checkCartExistForCafe(key: referenceNumber, cartView: self.cartView, quantityLabel: self.quantityTextLabel)
+            
+        }
+    }
+    
+    
+    
 
     @IBAction func backButtonTapped(_ sender: Any)
     {
@@ -33,6 +56,24 @@ class ProductDetailVC: UIViewController,UICollectionViewDataSource,UICollectionV
         self.dismiss(animated: true, completion: nil)
         
     }
+    
+    
+    //MARK:- Cart View Functions
+    
+    @IBAction func cartViewButtonsTapped(_ sender: UIButton) {
+        
+        if sender.titleLabel?.text == "Cancel"
+        {
+            let referenceNumber = self.userID + "-" + String(self.productManager.shopID)
+            self.removeCart(key: referenceNumber, cartView: self.cartView)
+        }
+        
+        if sender.titleLabel?.text == "Go Pay"
+        {
+            print("Go Pay Button Tapped")
+        }
+    }
+    
     
     //MARK:- Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int

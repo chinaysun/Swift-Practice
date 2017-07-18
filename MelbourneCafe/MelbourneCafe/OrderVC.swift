@@ -138,7 +138,6 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
             self.selectedSize = coffee.availableSize[row]
         }
         
-        print(self.selectedSize)
     }
     
     
@@ -244,21 +243,25 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
             
                 let orderMessage = "You want to order\n" + orderItem.orderItemDescription
             
-                self.createAlert(withTitle: "Notification", message: orderMessage)
+                self.createAlertWithFunctions(withTitle: "Notification", message: orderMessage, function: {self.dismiss(animated: true, completion: nil)})
                 
+
                 
                 //check if the cart exist
                 if let userID = UserDefaults.standard.object(forKey: "UserID") as! String?
                 {
                     let referenceNumber = userID + "-" + String(self.selectedProduct.shopID)
                     
-                    if let cartData = UserDefaults.standard.object(forKey: referenceNumber) as! Data?
+                    if let cartDictionaryData = UserDefaults.standard.data(forKey: referenceNumber)
                     {
-                       if let cart = NSKeyedUnarchiver.unarchiveObject(with: cartData) as? Cart
-                       {
-                            cart.orderNewItem(newItem: orderItem)
                         
-                       }
+                        let cart = self.loadCartData(cartDictionaryData: cartDictionaryData)
+                        
+                        cart.orderNewItem(newItem: orderItem)
+                        
+                        //save data
+                        self.saveCartData(cart: cart)
+                        
                         
                     }else
                     {
@@ -266,15 +269,14 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
                         let cart = Cart(shopID: self.selectedProduct.shopID, userID: userID)
                         cart.orderNewItem(newItem: orderItem)
                         
-                        let data = NSKeyedArchiver.archivedData(withRootObject: cart)
-                        UserDefaults.standard.set(data, forKey: referenceNumber)
-                        UserDefaults.standard.synchronize()
+                        //save data
+                        self.saveCartData(cart: cart)
+                        
                         
                     }
                     
                 }
                 
-                self.dismiss(animated: true, completion: nil)
                 
             }
         }else

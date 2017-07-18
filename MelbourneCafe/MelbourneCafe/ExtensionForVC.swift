@@ -11,11 +11,23 @@ import UIKit
 extension UIViewController
 {
     
+    //MARK:- Alert Functions
     func createAlert(withTitle title:String?, message:String?)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func createAlertWithFunctions(withTitle title:String?,message:String?,function:@escaping ()->())
+    {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler:{ action in function() })
+        alert.addAction(action)
+        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
         
     }
@@ -30,6 +42,57 @@ extension UIViewController
         
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    //MARK:- Cart Functions
+    func saveCartData(cart:Cart)
+    {
+        let key = cart.referenceNumber
+        let cartDictionary = cart.convertToDictionary()
+        
+        let cartDictionaryData = NSKeyedArchiver.archivedData(withRootObject: cartDictionary)
+        UserDefaults.standard.set(cartDictionaryData, forKey: key)
+        UserDefaults.standard.synchronize()
+        
+    }
+    
+    func loadCartData(cartDictionaryData:Data)->Cart
+    {
+        let cartDictionary = NSKeyedUnarchiver.unarchiveObject(with: cartDictionaryData) as? NSDictionary
+        
+        let cart = Cart(cartDictionary: cartDictionary!)
+        
+        return cart
+        
+    }
+    
+    //MARK:- Cart View Function
+    func checkCartExistForCafe(key:String,cartView:UIView,quantityLabel:UILabel)
+    {
+        if let cartDictionaryData = UserDefaults.standard.data(forKey: key)
+        {
+            let cart = self.loadCartData(cartDictionaryData: cartDictionaryData)
+            let quantity = cart.totalQuantity
+            
+            //update UI
+            quantityLabel.text = "You have " + String(quantity) + " items"
+            cartView.isHidden = false
+            
+            
+        }else
+        {
+            cartView.isHidden = true
+        }
+    }
+    
+    func removeCart(key:String,cartView:UIView)
+    {
+        self.createAlertWithFunctions(withTitle: "Notification", message: "Are you sure to remove all items from cart ? ", function: {
+            
+            UserDefaults.standard.removeObject(forKey: key)
+            cartView.isHidden = true
+        })
     }
     
 }

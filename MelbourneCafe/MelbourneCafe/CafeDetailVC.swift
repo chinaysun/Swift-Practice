@@ -22,6 +22,8 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     @IBOutlet weak var navigationTitle: UINavigationItem!
     @IBOutlet weak var cafeProductCollectionView: UICollectionView!
     
+    @IBOutlet weak var cartView: UIView!
+    @IBOutlet weak var quantityTextLabel: UILabel!
     
     var userID:String?
     var isUserLoggedIn = false
@@ -48,7 +50,6 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         self.checkUserFavoriteCafeList()
         
         self.downloadCafeProductList()
-        
         
     
     }
@@ -81,6 +82,9 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         {
             self.userID = UserDefaults.standard.object(forKey: "UserID") as! String?
             self.cafe.checkForFavorite(userID: self.userID!, complication: { self.updateLikeButtonImage()})
+            
+            let referenceNumber = self.userID! + "-" + String(self.cafe.shopID)
+            self.checkCartExistForCafe(key: referenceNumber, cartView: self.cartView, quantityLabel: self.quantityTextLabel)
             
         }
         
@@ -214,6 +218,22 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         
 
     }
+    
+    @IBAction func cartViewButtonTapped(_ sender: UIButton)
+    {
+        if sender.titleLabel?.text == "Cancel"
+        {
+            let referenceNumber = self.userID! + "-" + String(self.cafe.shopID)
+            self.removeCart(key: referenceNumber, cartView: self.cartView)
+        }
+        
+        if sender.titleLabel?.text == "Go Pay"
+        {
+            print("Go Pay Button Tapped")
+        }
+        
+    }
+    
     
     // MARK: - Navigation
     
