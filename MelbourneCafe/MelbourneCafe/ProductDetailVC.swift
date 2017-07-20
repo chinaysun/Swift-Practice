@@ -62,15 +62,16 @@ class ProductDetailVC: UIViewController,UICollectionViewDataSource,UICollectionV
     
     @IBAction func cartViewButtonsTapped(_ sender: UIButton) {
         
+        let referenceNumber = self.userID + "-" + String(self.productManager.shopID)
+        
         if sender.titleLabel?.text == "Cancel"
         {
-            let referenceNumber = self.userID + "-" + String(self.productManager.shopID)
             self.removeCart(key: referenceNumber, cartView: self.cartView)
         }
         
         if sender.titleLabel?.text == "Go Pay"
         {
-            print("Go Pay Button Tapped")
+           self.goToOrderDetailView(key: referenceNumber)
         }
     }
     

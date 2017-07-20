@@ -80,9 +80,11 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         
         if self.isUserLoggedIn
         {
+            //favorite checking
             self.userID = UserDefaults.standard.object(forKey: "UserID") as! String?
             self.cafe.checkForFavorite(userID: self.userID!, complication: { self.updateLikeButtonImage()})
             
+            //cart functions
             let referenceNumber = self.userID! + "-" + String(self.cafe.shopID)
             self.checkCartExistForCafe(key: referenceNumber, cartView: self.cartView, quantityLabel: self.quantityTextLabel)
             
@@ -182,22 +184,10 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     @IBAction func likeButtonTapped(_ sender: UIButton) {
         
         
-        if !isUserLoggedIn {
+        if !isUserLoggedIn
+        {
             
-            //create alert
-            let alert = UIAlertController(title: "Notice", message: "Please Login Before Using This Function", preferredStyle: UIAlertControllerStyle.alert)
-            
-            
-            let userLoginView = storyboard?.instantiateViewController(withIdentifier: "userLoginView")
-            
-            //back to login view after click button
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in self.present(userLoginView!, animated: true, completion: nil) }))
-            
-            
-            let cancelButton = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-            alert.addAction(cancelButton)
-            
-            self.present(alert, animated: true, completion: nil)
+          self.goToLoginPageAlert()
             
         }else
         {
@@ -221,15 +211,17 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     
     @IBAction func cartViewButtonTapped(_ sender: UIButton)
     {
+        let referenceNumber = self.userID! + "-" + String(self.cafe.shopID)
+        
         if sender.titleLabel?.text == "Cancel"
         {
-            let referenceNumber = self.userID! + "-" + String(self.cafe.shopID)
+          
             self.removeCart(key: referenceNumber, cartView: self.cartView)
         }
         
         if sender.titleLabel?.text == "Go Pay"
         {
-            print("Go Pay Button Tapped")
+            self.goToOrderDetailView(key: referenceNumber)
         }
         
     }

@@ -48,6 +48,7 @@ extension UIViewController
     //MARK:- Cart Functions
     func saveCartData(cart:Cart)
     {
+        
         let key = cart.referenceNumber
         let cartDictionary = cart.convertToDictionary()
         
@@ -94,5 +95,26 @@ extension UIViewController
             cartView.isHidden = true
         })
     }
+    
+    
+    
+    func goToOrderDetailView(key:String)
+    {
+        if let cartDictionaryData = UserDefaults.standard.data(forKey: key)
+        {
+            let cart = self.loadCartData(cartDictionaryData: cartDictionaryData)
+            
+            let orderItemDetailView = storyboard?.instantiateViewController(withIdentifier: "orderItemDetailView")
+        
+            if let destinationView = orderItemDetailView as? OrderDetailVC
+            {
+                destinationView.myCart = cart
+            }
+        
+            self.present(orderItemDetailView!, animated: true, completion: nil)
+            
+        }
+    }
+    
     
 }

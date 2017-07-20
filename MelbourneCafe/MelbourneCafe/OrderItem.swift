@@ -53,6 +53,8 @@ class OrderItem
     
     var delegate:QuantityModification?
     
+    var delegateFromCart:QuantityModification?
+    
     var quantity:Int = 0
     {
         didSet
@@ -62,6 +64,11 @@ class OrderItem
             if delegate != nil
             {
                 delegate?.sendNewQuantity(updateRequest: true)
+            }
+            
+            if delegateFromCart != nil
+            {
+                delegateFromCart?.sendNewQuantity(updateRequest: true)
             }
         }
     }
@@ -87,9 +94,9 @@ class OrderItem
             switch self._productType!
             {
                 case "Coffee":
-                    description = self._size + " " + self._productName + " - " + String(self._sugar) + " Sugar  * " + String(self.quantity)
+                    description = self._size + " " + self._productName + " - " + String(self._sugar) + " Sugar " 
                 default:
-                    description = self._productName + " * " + String(self.quantity)
+                    description = self._productName
                 
             }
             

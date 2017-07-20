@@ -9,15 +9,26 @@
 import Foundation
 import Alamofire
 
+protocol CartTotalInfoModification
+{
+    func sendCartNewInfo(newTotalPrice:Double,newTotalQuantity:Int)
+}
+
+
 class Cart:QuantityModification
 {
     
     func sendNewQuantity(updateRequest: Bool) {
+        
         if updateRequest
         {
             self.updateTotalQuantityAndPrice()
+
         }
     }
+    
+    
+    var delegate:CartTotalInfoModification?
     
     private var _userID:String!
     
@@ -51,6 +62,7 @@ class Cart:QuantityModification
     }
     
     var orderList = [OrderItem]()
+ 
     
     private var _totalPrice = 0.0
     
@@ -135,13 +147,18 @@ class Cart:QuantityModification
             self._totalQuantity += eachItem.quantity
             self._totalPrice += eachItem.subTotalPrice
         }
+        
+        if self.delegate != nil
+        {
+            self.delegate?.sendCartNewInfo(newTotalPrice: self._totalPrice, newTotalQuantity: self._totalQuantity)
+        }
     }
     
     
     func orderNewItem(newItem:OrderItem)
     {
         self.orderList.append(newItem)
-        newItem.delegate = self
+        newItem.delegateFromCart = self
         self.updateTotalQuantityAndPrice()
     }
     

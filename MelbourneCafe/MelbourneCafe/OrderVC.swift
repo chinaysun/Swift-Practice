@@ -241,7 +241,7 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
                 //create the orderItem
                 let orderItem = OrderItem(product: self.selectedProduct, quantity: self.quantity, specialNote: customerSpecialNote!, sugar: orderSugar, size: orderSize)
             
-                let orderMessage = "You want to order\n" + orderItem.orderItemDescription
+                let orderMessage = "You want to order\n" + orderItem.orderItemDescription + " * " + String(orderItem.quantity)
             
                 self.createAlertWithFunctions(withTitle: "Notification", message: orderMessage, function: {self.dismiss(animated: true, completion: nil)})
                 
