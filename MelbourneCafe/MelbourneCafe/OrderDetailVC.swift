@@ -24,6 +24,7 @@ class OrderDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,
     //MARK:- View Life Cycle
     override func viewDidAppear(_ animated: Bool)
     {
+        self.myNavigationTitle.title = "Ref#: " + self.myCart.referenceNumber
         self.myCart.delegate = self
         self.totalQuantityTextLabel.text = String(self.myCart.totalQuantity)
         self.totalPriceTextLabel.text = String(self.myCart.totalPrice)
