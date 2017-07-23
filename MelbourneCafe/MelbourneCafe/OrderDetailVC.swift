@@ -28,6 +28,7 @@ class OrderDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,
         self.myCart.delegate = self
         self.totalQuantityTextLabel.text = String(self.myCart.totalQuantity)
         self.totalPriceTextLabel.text = String(self.myCart.totalPrice)
+
     }
     
 
@@ -93,11 +94,19 @@ class OrderDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,
     
 
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-
+        if segue.identifier == "orderConfirmation"
+        {
+            let destinationView:OrderConfirmVC = segue.destination as! OrderConfirmVC
+            destinationView.myCart = self.myCart
+        }
+    }
+    
+    @IBAction func confirmButtonTapped(_ sender: UIBarButtonItem)
+    {
+        self.saveCartData(cart:self.myCart)
+        performSegue(withIdentifier: "orderConfirmation", sender: self)
     }
    
     @IBAction func backButtonTapped(_ sender: Any)

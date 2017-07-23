@@ -100,11 +100,6 @@ class OrderItem
                 
             }
             
-            if self.customerSpecialNote != ""
-            {
-                description  = description + "\n" + "  p.s. " + self.customerSpecialNote
-            }
-            
             return description
         }
     }
