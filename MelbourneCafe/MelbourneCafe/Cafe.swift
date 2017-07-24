@@ -27,6 +27,16 @@ class Cafe:NSObject
     var favorite:Int?
     
     
+    //cafe brief info
+    var cafeBriefInfo:String
+    {
+        get
+        {
+            return "Name: \(self.name)\nTel: \(self.ph_number)\nABN: \(self.abn)"
+        }
+    }
+    
+    
     //geo location info
     var latitude:Double = 0.0
     var longitude:Double = 0.0
@@ -147,7 +157,6 @@ class Cafe:NSObject
         
     }
     
-       
     
 
 }

@@ -143,6 +143,7 @@ class ProductDetailVC: UIViewController,UICollectionViewDataSource,UICollectionV
             let destinationView:OrderVC = segue.destination as! OrderVC
             
             destinationView.selectedProduct = self.selectedProduct!
+            destinationView.selectedCafeBriefInfo = self.productManager.cafeBriefInfo
         }
     }
 

@@ -28,6 +28,8 @@ class OrderDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource,
         self.myCart.delegate = self
         self.totalQuantityTextLabel.text = String(self.myCart.totalQuantity)
         self.totalPriceTextLabel.text = String(self.myCart.totalPrice)
+        
+        //Don't need to check if the user is logged because only logged user can access this view
 
     }
     

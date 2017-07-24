@@ -58,7 +58,8 @@ class CafeDetailVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         
         if self.productManager == nil
         {
-            self.productManager = ProductManager.init(shopID: self.cafe.shopID)
+            self.productManager = ProductManager.init(shopID: self.cafe.shopID,shopDescription:self.cafe.cafeBriefInfo)
+            
         }
         
     }

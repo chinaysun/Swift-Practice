@@ -24,10 +24,14 @@ class ProductManager
     var downloadError:Bool?
     var downloadErrorInfo:String?
     
+    //cafe Info Brief
+    var cafeBriefInfo:String?
     
-    init(shopID:Int) {
+    
+    init(shopID:Int,shopDescription:String) {
         
         self.shopID = shopID
+        self.cafeBriefInfo = shopDescription
     }
     
     
@@ -183,7 +187,7 @@ class ProductManager
                             if let data = response.result.value
                             {
                                 product.productImage = UIImage(data: data)!
-                                print("Download Successfully")
+//                                print("Download Successfully")
                                 
                             }
 

@@ -16,5 +16,7 @@ class Product
     var imageURL:String = ""
     var productImage:UIImage = UIImage(named: "defaultProfileImage")!
     var price: Double = 0.0
+    var shopID:Int = 0
+    var shopBriefInfo:String = ""
     
 }

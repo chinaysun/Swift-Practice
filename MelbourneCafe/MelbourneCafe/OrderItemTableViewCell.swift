@@ -51,6 +51,12 @@ class OrderItemTableViewCell: UITableViewCell,QuantityModification {
     private func updateUI()
     {
         self.productDescriptionTextLabel.text = orderItem.orderItemDescription + " - $" + String(orderItem.price) + "/each"
+        
+        if self.orderItem.customerSpecialNote != ""
+        {
+            self.productDescriptionTextLabel.text  = self.productDescriptionTextLabel.text! + "\n" + "  p.s. " + self.orderItem.customerSpecialNote
+        }
+        
         self.productQuantity.text = String(orderItem.quantity)
         
     }

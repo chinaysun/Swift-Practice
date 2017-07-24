@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate {
 
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productNameTextLabel: UILabel!
@@ -24,6 +24,7 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     
     //received Variable
     var selectedProduct:Product!
+    var selectedCafeBriefInfo:String!
     
     private var quantity = 0
     {
@@ -51,7 +52,24 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
 
         }
     }
-
+    
+    
+    //MARK:- Text View Delegate
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.specialNoteTextView.resignFirstResponder()
+        
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.specialNoteTextView.text = ""
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        return textView.text.characters.count + (text.characters.count - range.length) <= 140
+    }
     
     //MARK:- View Life Cycle
     
@@ -266,8 +284,9 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
                     }else
                     {
                         //create a new cart
-                        let cart = Cart(shopID: self.selectedProduct.shopID, userID: userID)
+                        let cart = Cart(shopID: self.selectedProduct.shopID, userID: userID, shopDescription:self.selectedCafeBriefInfo)
                         cart.orderNewItem(newItem: orderItem)
+                        
                         
                         //save data
                         self.saveCartData(cart: cart)

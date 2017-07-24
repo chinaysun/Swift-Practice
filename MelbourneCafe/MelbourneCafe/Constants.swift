@@ -22,6 +22,7 @@ let USER_UPDATE_INFO_URL = SERVER_URL + "CustomerUpdateInfo.php"
 let USER_DOWNLOAD_FAVORITE_CAFE_INFO = SERVER_URL + "CustomerGetFavoriteCafe.php"
 let USER_CHECK_FAVORITE_CAFE_INFO = SERVER_URL + "CustomerCheckFavoriteCafe.php"
 let USER_UPDATE_FAVORITE_CAFE_INFO = SERVER_URL + "CustomerUpdateFavoriteCafe.php"
+let USER_MAKE_ORDER = SERVER_URL + "CustomerOrder.php"
 
 // Method POST WITH MultipartForm data
 let USER_UPLOAD_PROFILE_IMAGE_URL = SERVER_URL + "CustomerUploadProfileImage.php"
