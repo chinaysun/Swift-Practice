@@ -54,13 +54,32 @@ class OrderConfirmVC: UIViewController
         if !self.myCart.orderError
         {
             let message = "You order has been accepted. After this order is completed, you will get a notification"
-            self.createAlert(withTitle: "Notification", message: message)
+            
+            //back to the initial view
+            self.createAlertWithFunctions(withTitle: "Notification", message: message, allowCancel: false, function:
+                {
+                    let refernceNumber = self.myCart.referenceNumber
+                    
+                    UserDefaults.standard.removeObject(forKey: refernceNumber)
+                    UserDefaults.standard.synchronize()
+                    
+                    self.performSegue(withIdentifier: "unwindToTabBar", sender: self)
+                
+                })
             
             
         }else
         {
-            let message = self.myCart.orderErrorInfo + ",please try again"
-            self.createAlertWithFunctions(withTitle: "Notification", message: message, function: self.customerConfirmOrder)
+            if self.myCart.orderErrorInfo != ""
+            {
+                let message = self.myCart.orderErrorInfo + ",please try again"
+                self.createAlertWithFunctions(withTitle: "Notification", message: message, allowCancel: true, function: self.customerConfirmOrder)
+            }else
+            {
+                let message = self.myCart.orderErrorInfo + ", please contact\n" + self.myCart.shopDescription
+                self.createAlert(withTitle: "Notification", message: message)
+            }
+            
         }
         
     }

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 //Mark:- Server URL
 let SERVER_URL = "http://127.0.0.1:8888/MelbourneCafe/"
 
@@ -23,6 +22,8 @@ let USER_DOWNLOAD_FAVORITE_CAFE_INFO = SERVER_URL + "CustomerGetFavoriteCafe.php
 let USER_CHECK_FAVORITE_CAFE_INFO = SERVER_URL + "CustomerCheckFavoriteCafe.php"
 let USER_UPDATE_FAVORITE_CAFE_INFO = SERVER_URL + "CustomerUpdateFavoriteCafe.php"
 let USER_MAKE_ORDER = SERVER_URL + "CustomerOrder.php"
+let USER_ORDER_LIST = SERVER_URL + "CustomerOrderHistory.php"
+
 
 // Method POST WITH MultipartForm data
 let USER_UPLOAD_PROFILE_IMAGE_URL = SERVER_URL + "CustomerUploadProfileImage.php"

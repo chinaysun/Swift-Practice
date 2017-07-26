@@ -37,6 +37,11 @@
 		54AE0D141EDBF72F00CC6D1B /* UserInfoValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE0D131EDBF72F00CC6D1B /* UserInfoValidation.swift */; };
 		54AE0D161EDBFCBF00CC6D1B /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE0D151EDBFCBF00CC6D1B /* UserLogin.swift */; };
 		54AE0D181EDD43A100CC6D1B /* MyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE0D171EDD43A100CC6D1B /* MyProfileVC.swift */; };
+		54E09B451F2719DF00A94283 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E09B441F2719DF00A94283 /* TabBarVC.swift */; };
+		54E09B4B1F271FDD00A94283 /* OrderHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E09B4A1F271FDD00A94283 /* OrderHistoryManager.swift */; };
+		54E09B511F28892500A94283 /* OrderHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E09B501F28892500A94283 /* OrderHistoryVC.swift */; };
+		54E09B531F28983B00A94283 /* OrderHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E09B521F28983B00A94283 /* OrderHistoryTableViewCell.swift */; };
+		54E09B551F28AE0E00A94283 /* OrderHistoryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E09B541F28AE0E00A94283 /* OrderHistoryDetailVC.swift */; };
 		54E715E11ED6900D00C20B58 /* UserRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E715E01ED6900D00C20B58 /* UserRegisterVC.swift */; };
 		54E715E31ED699DE00C20B58 /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E715E21ED699DE00C20B58 /* UserRegister.swift */; };
 		54E715E51ED6A70A00C20B58 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E715E41ED6A70A00C20B58 /* Constants.swift */; };
@@ -82,6 +87,11 @@
 		54AE0D131EDBF72F00CC6D1B /* UserInfoValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoValidation.swift; sourceTree = "<group>"; };
 		54AE0D151EDBFCBF00CC6D1B /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		54AE0D171EDD43A100CC6D1B /* MyProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileVC.swift; sourceTree = "<group>"; };
+		54E09B441F2719DF00A94283 /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		54E09B4A1F271FDD00A94283 /* OrderHistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHistoryManager.swift; sourceTree = "<group>"; };
+		54E09B501F28892500A94283 /* OrderHistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHistoryVC.swift; sourceTree = "<group>"; };
+		54E09B521F28983B00A94283 /* OrderHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		54E09B541F28AE0E00A94283 /* OrderHistoryDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHistoryDetailVC.swift; sourceTree = "<group>"; };
 		54E715E01ED6900D00C20B58 /* UserRegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegisterVC.swift; sourceTree = "<group>"; };
 		54E715E21ED699DE00C20B58 /* UserRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
 		54E715E41ED6A70A00C20B58 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -156,6 +166,7 @@
 				541B2DE11F028E3B0052086F /* FavoriteCafeTableViewCell.swift */,
 				5491276B1F10F7070021359B /* ProductCVC.swift */,
 				54FA9E371F20902200805BFD /* OrderItemTableViewCell.swift */,
+				54E09B521F28983B00A94283 /* OrderHistoryTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -175,6 +186,9 @@
 				541ECB171F1B9C3F0058B8B1 /* ExtensionForVC.swift */,
 				54FA9E351F208E5600805BFD /* OrderDetailVC.swift */,
 				54FA9E391F21E90B00805BFD /* OrderConfirmVC.swift */,
+				54E09B441F2719DF00A94283 /* TabBarVC.swift */,
+				54E09B501F28892500A94283 /* OrderHistoryVC.swift */,
+				54E09B541F28AE0E00A94283 /* OrderHistoryDetailVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -194,6 +208,7 @@
 				541B81941F0B454100F25E0C /* Coffee.swift */,
 				541ECB0B1F13C1300058B8B1 /* Cart.swift */,
 				541ECB0D1F14D38B0058B8B1 /* OrderItem.swift */,
+				54E09B4A1F271FDD00A94283 /* OrderHistoryManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -350,6 +365,7 @@
 				5471286B1EF571E400C30855 /* MKCafe.swift in Sources */,
 				541ECB0E1F14D38B0058B8B1 /* OrderItem.swift in Sources */,
 				5491276C1F10F7070021359B /* ProductCVC.swift in Sources */,
+				54E09B531F28983B00A94283 /* OrderHistoryTableViewCell.swift in Sources */,
 				54FA9E361F208E5600805BFD /* OrderDetailVC.swift in Sources */,
 				541ECB0C1F13C1300058B8B1 /* Cart.swift in Sources */,
 				547128591EF25B5D00C30855 /* FindCafeVC.swift in Sources */,
@@ -360,17 +376,21 @@
 				54AE0D111EDBC8A000CC6D1B /* UserLoginVC.swift in Sources */,
 				548CEDF71EDE722C00610EE3 /* UserProfile.swift in Sources */,
 				54AE0D161EDBFCBF00CC6D1B /* UserLogin.swift in Sources */,
+				54E09B451F2719DF00A94283 /* TabBarVC.swift in Sources */,
 				541B2D831EFA219B0052086F /* CafeDetailVC.swift in Sources */,
 				541B2DE01F020E820052086F /* MyFavoriteCafeVC.swift in Sources */,
 				54AE0D141EDBF72F00CC6D1B /* UserInfoValidation.swift in Sources */,
 				54E715E11ED6900D00C20B58 /* UserRegisterVC.swift in Sources */,
 				54FA9E3A1F21E90B00805BFD /* OrderConfirmVC.swift in Sources */,
+				54E09B511F28892500A94283 /* OrderHistoryVC.swift in Sources */,
 				54E715E31ED699DE00C20B58 /* UserRegister.swift in Sources */,
 				54AE0D181EDD43A100CC6D1B /* MyProfileVC.swift in Sources */,
 				541ECB181F1B9C3F0058B8B1 /* ExtensionForVC.swift in Sources */,
 				543C1AB11ED27A7000EDA57E /* AppDelegate.swift in Sources */,
 				541ECB161F15D9110058B8B1 /* OrderVC.swift in Sources */,
+				54E09B551F28AE0E00A94283 /* OrderHistoryDetailVC.swift in Sources */,
 				549127681F0FBEC80021359B /* ProductDetailVC.swift in Sources */,
+				54E09B4B1F271FDD00A94283 /* OrderHistoryManager.swift in Sources */,
 				54FA9E381F20902200805BFD /* OrderItemTableViewCell.swift in Sources */,
 				5491276A1F10BB830021359B /* ProductManager.swift in Sources */,
 				541B81911F0B2C1C00F25E0C /* Product.swift in Sources */,

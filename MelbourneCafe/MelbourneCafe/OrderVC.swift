@@ -261,7 +261,7 @@ class OrderVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,UITe
             
                 let orderMessage = "You want to order\n" + orderItem.orderItemDescription + " * " + String(orderItem.quantity)
             
-                self.createAlertWithFunctions(withTitle: "Notification", message: orderMessage, function: {self.dismiss(animated: true, completion: nil)})
+                self.createAlertWithFunctions(withTitle: "Notification", message: orderMessage, allowCancel: true, function: {self.dismiss(animated: true, completion: nil)})
                 
 
                 

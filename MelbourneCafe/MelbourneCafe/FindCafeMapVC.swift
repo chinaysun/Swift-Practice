@@ -262,7 +262,6 @@ class FindCafeMapVC: UIViewController,CLLocationManagerDelegate,MKMapViewDelegat
     var selectedCafe:Cafe?
     
     //segue identifier
-    let backToTableView = "backTableView"
     let goToCafeDetail = "showCafeDetailFromMap"
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
@@ -273,14 +272,6 @@ class FindCafeMapVC: UIViewController,CLLocationManagerDelegate,MKMapViewDelegat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == self.backToTableView
-        {
-            let destinationView:FindCafeVC = segue.destination as! FindCafeVC
-            
-            destinationView.cafeManager = self.cafeManager
-            destinationView.locationManager = self.locationManager
-            
-        }
         
         
         if segue.identifier == self.goToCafeDetail

@@ -21,16 +21,21 @@ extension UIViewController
         
     }
     
-    func createAlertWithFunctions(withTitle title:String?,message:String?,function:@escaping ()->())
+    func createAlertWithFunctions(withTitle title:String?,message:String?,allowCancel:Bool,function:@escaping ()->())
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "OK", style: .default, handler:{ action in function() })
         alert.addAction(action)
-        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        alert.addAction(cancel)
+        
+        if allowCancel
+        {
+            let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            alert.addAction(cancel)
+        }
         present(alert, animated: true, completion: nil)
         
     }
+    
     
     func goToLoginPageAlert()
     {
@@ -89,7 +94,7 @@ extension UIViewController
     
     func removeCart(key:String,cartView:UIView)
     {
-        self.createAlertWithFunctions(withTitle: "Notification", message: "Are you sure to remove all items from cart ? ", function: {
+        self.createAlertWithFunctions(withTitle: "Notification", message: "Are you sure to remove all items from cart ? ", allowCancel: true, function: {
             
             UserDefaults.standard.removeObject(forKey: key)
             cartView.isHidden = true

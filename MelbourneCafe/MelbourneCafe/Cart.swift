@@ -76,11 +76,10 @@ class Cart:QuantityModification
         }
     }
     
-    //only When Paid it will be created
-    private var orderTime:Date!
+    var orderTime:Date!
     
-    //only when Completed it will be created
-    private var finishedTime:Date!
+
+    var completedTime:Date!
     
     
     var status:Status = Status.Ordering
@@ -206,7 +205,8 @@ class Cart:QuantityModification
         
         for item in self.orderList
         {
-            orderListDictionary[orderNumber] = item.convertToDictionary()
+            let itemNumber = "item" + String(orderNumber)
+            orderListDictionary[itemNumber] = item.convertToDictionary()
             orderNumber += 1
         }
         
@@ -297,6 +297,8 @@ class Cart:QuantityModification
         
         let myDateString = formatter.string(from: self.orderTime)
         
+        let referenceID = self._referenceNumber + "-" + myDateString
+        
         var status = ""
         switch self.status {
         case .Paid,.Ordering:
@@ -308,17 +310,29 @@ class Cart:QuantityModification
         
         
         let message = self.convertToDictionary()
-       
+        var messageJsonString:NSString = ""
+        
+        
+        //convert to json
+        do
+        {
+            let messageJsonData = try JSONSerialization.data(withJSONObject: message, options: .prettyPrinted)
+            messageJsonString = NSString(data:messageJsonData,encoding: String.Encoding.utf8.rawValue)!
+            
+        }catch let error as NSError
+        {
+            print(error)
+        }
         
         
         let parameters:Parameters = [
         
             "ShopID":self._shopID,
             "CustomerID":userID,
-            "ReferenceID":self._referenceNumber,
+            "ReferenceID":referenceID,
             "CreatedTime":myDateString,
             "OrderStatus":status,
-            "Message":message
+            "Message":messageJsonString
         
         ]
         

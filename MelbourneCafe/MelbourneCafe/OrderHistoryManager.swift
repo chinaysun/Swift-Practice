@@ -9,11 +9,21 @@
 import Foundation
 import Alamofire
 
+protocol OrderHistoryDownloadDelegate
+{
+    func sendDownloadOrderList(downloadError:Bool,downloadErrorInfo:String)
+}
+
+
 class OrderHistoryManager
 {
     
     var processingList = [Cart]()
     var completedList = [Cart]()
+
+    var delegate:OrderHistoryDownloadDelegate?
+    private var downloadError:Bool = false
+    private var downloadErrorInfo:String = "Download Successfully"
     
     init(userID:String) {
         self.downloadOrderList(userID: userID)
@@ -48,11 +58,12 @@ class OrderHistoryManager
                     
                     if error
                     {
-                        let message = jsonData.value(forKey: "error") as! String
+                        let message = jsonData.value(forKey: "message") as! String
                         
                         if message.isEmpty
                         {
-                            print("Not Result")
+                            self.downloadError = true
+                            self.downloadErrorInfo = "You have not any orders records yet"
                         }
                         
                     }else
@@ -76,11 +87,32 @@ class OrderHistoryManager
                                             
                                             if let orderStatus  = eachOrder["OrderStatus"] as? String
                                             {
+                                                
+                                                let formatter = DateFormatter()
+                                                formatter.dateFormat = "yyyy-MM-dd HH:MM:SS"
+                                                
+                                                
+                                                if let createdTime = eachOrder["CreatedTime"] as? String
+                                                {
+                                                    cart.orderTime = formatter.date(from: createdTime)
+                                                }
+                                                
+                                                if let completedTime = eachOrder["CompletedTime"] as? String
+                                                {
+                                                    if !completedTime.isEmpty
+                                                    {
+                                                        cart.completedTime = formatter.date(from: completedTime)
+                                                    }
+                                                    
+                                                }
+
                                                 switch orderStatus
                                                 {
                                                     case "Paid":
                                                         self.processingList.append(cart)
                                                     case "Completed":
+
+                                                        cart.status = Cart.Status.Completed
                                                         self.completedList.append(cart)
                                                     default:
                                                         break
@@ -94,13 +126,16 @@ class OrderHistoryManager
                                     
                                 }
                             }
-                            
-                            
 
                         }
                         
-                        
                     }
+                
+                    if self.delegate != nil
+                    {
+                        self.delegate?.sendDownloadOrderList(downloadError: self.downloadError, downloadErrorInfo: self.downloadErrorInfo)
+                    }
+                
                 
             }
             
