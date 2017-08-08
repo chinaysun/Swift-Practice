@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import CoreLocation
 
-class FindCafeVC: UIViewController,CafeManagerDelegate,CLLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource
+class FindCafeVC: UIViewController,CafeManagerDelegate,CLLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate
 {
     
     //MARK: - Basic Variables
@@ -24,7 +24,6 @@ class FindCafeVC: UIViewController,CafeManagerDelegate,CLLocationManagerDelegate
     
     @IBOutlet weak var mapButton: UIBarButtonItem!
     
-    //
     
     //delegate for cafe Info
     func cafeInfoDowloadComplication(downloadError:Bool,downloadErrorInfo:String)
@@ -168,11 +167,7 @@ class FindCafeVC: UIViewController,CafeManagerDelegate,CLLocationManagerDelegate
         }
     }
     
-    //MARK: - Tavle View
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Do Sth. When Selected")
-    }
-    
+    //MARK: - Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
@@ -245,6 +240,14 @@ class FindCafeVC: UIViewController,CafeManagerDelegate,CLLocationManagerDelegate
         self.cafeTableView.reloadData()
     }
     
+    //MARK:- Search Bar Functions
+    
+    @IBOutlet weak var cafeSearchBar: UISearchBar!
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.cafeSearchBar.resignFirstResponder()
+    }
     
     
     

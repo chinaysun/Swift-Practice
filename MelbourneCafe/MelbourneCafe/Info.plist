@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en_GB</string>
+	<key>CFBundleDisplayName</key>
+	<string>MelbourneCafe</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

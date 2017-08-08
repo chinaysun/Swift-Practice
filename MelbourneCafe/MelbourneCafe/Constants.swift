@@ -9,7 +9,7 @@
 import Foundation
 
 //Mark:- Server URL
-let SERVER_URL = "http://127.0.0.1:8888/MelbourneCafe/"
+let SERVER_URL = "http://10.0.0.1:8888/MelbourneCafe/"
 
 //Mark:-  API for USER
 
@@ -17,7 +17,7 @@ let SERVER_URL = "http://127.0.0.1:8888/MelbourneCafe/"
 let USER_REGISTER_URL = SERVER_URL + "CustomerRegister.php"
 let USER_LOGIN_URL = SERVER_URL + "CustomerLogin.php"
 let USER_INFO_URL = SERVER_URL + "CustomerGetInfo.php"
-let USER_UPDATE_INFO_URL = SERVER_URL + "CustomerUpdateInfo.php"
+let USER_UPDATE_INFO_URL = SERVER_URL + "CustomerUpdateProfile.php"
 let USER_DOWNLOAD_FAVORITE_CAFE_INFO = SERVER_URL + "CustomerGetFavoriteCafe.php"
 let USER_CHECK_FAVORITE_CAFE_INFO = SERVER_URL + "CustomerCheckFavoriteCafe.php"
 let USER_UPDATE_FAVORITE_CAFE_INFO = SERVER_URL + "CustomerUpdateFavoriteCafe.php"

@@ -192,6 +192,18 @@ class MyFavoriteCafeVC: UITableViewController,CafeManagerDelegate,FavoriteCafeDe
         performSegue(withIdentifier: cafeDetailVC, sender: self)
     }
  
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete
+        {
+            self.createAlertWithFunctions(withTitle: "Notification", message: "Are you sure to remove this cafe from your favorite list ? ", allowCancel: true, function: { self.deleteCafeFromList(selectedCafe: (self.favoriteCafeManager?.cafeInfoList[indexPath.row])!) })
+        }
+        
+        
+    }
+    
+
 
     
     // MARK: - Navigation

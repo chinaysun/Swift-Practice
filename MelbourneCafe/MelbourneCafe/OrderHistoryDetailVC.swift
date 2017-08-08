@@ -16,7 +16,8 @@ class OrderHistoryDetailVC: UIViewController {
     @IBOutlet weak var orderTimeTextLabel: UILabel!
     @IBOutlet weak var completedTimeTextLabel: UILabel!
     @IBOutlet weak var durationTextLabel: UILabel!
-    @IBOutlet weak var receiptTextView: UITextView!
+    @IBOutlet weak var myReceiptView: ReceiptView!
+
     
     
     override func viewDidLoad() {
@@ -37,7 +38,7 @@ class OrderHistoryDetailVC: UIViewController {
             self.completedTimeTextLabel.text = "Completed Time: " + formatter.string(from: self.cart.completedTime)
         }
         
-        self.receiptTextView.text = self.cart.generateReceipt()
+        myReceiptView.cart = cart
         
         
     }

@@ -1007,7 +1007,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="orderHistoryCell" rowHeight="100" id="pu7-Gy-XMR" customClass="OrderHistoryTableViewCell" customModule="MelbourneCafe" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="orderHistoryCell" rowHeight="100" id="pu7-Gy-XMR" customClass="OrderHistoryTableViewCell" customModule="MelbourneCafe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pu7-Gy-XMR" id="9VZ-ie-E31">
@@ -1111,13 +1111,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="orderInfo" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhO-oj-JhD">
-                                <rect key="frame" x="16" y="152" width="343" height="458"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.9416199327" green="0.99104791879999998" blue="0.82873415949999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Completed Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6C4-J6-Ykq">
                                 <rect key="frame" x="16" y="94" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1125,14 +1118,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7s-tJ-E7M" customClass="ReceiptView" customModule="MelbourneCafe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="152" width="375" height="515"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.9416199327" green="0.99104791879999998" blue="0.82873415949999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="completedTimeTextLabel" destination="6C4-J6-Ykq" id="Gb1-av-y98"/>
                         <outlet property="durationTextLabel" destination="ceV-d6-xKS" id="8a2-RI-bB8"/>
+                        <outlet property="myReceiptView" destination="w7s-tJ-E7M" id="u3H-kX-MU3"/>
                         <outlet property="orderTimeTextLabel" destination="fBZ-bw-LxB" id="biA-PL-LfQ"/>
-                        <outlet property="receiptTextView" destination="nhO-oj-JhD" id="A9B-6w-6ny"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fW4-Zz-t0B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1222,7 +1220,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="orderItem" rowHeight="91" id="psd-Z1-hCz" customClass="OrderItemTableViewCell" customModule="MelbourneCafe" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="orderItem" rowHeight="91" id="psd-Z1-hCz" customClass="OrderItemTableViewCell" customModule="MelbourneCafe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="psd-Z1-hCz" id="bcc-M9-gyh">
@@ -1323,15 +1321,13 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Text" translatesAutoresizingMaskIntoConstraints="NO" id="okB-cA-x8R">
-                                <rect key="frame" x="14" y="59" width="345" height="366"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kQd-LE-ZjD" customClass="ReceiptView" customModule="MelbourneCafe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="375" height="549"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.9416199327" green="0.99104791879999998" blue="0.82873415949999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F81-0w-3qS">
-                                <rect key="frame" x="119" y="433" width="134" height="30"/>
+                                <rect key="frame" x="120" y="593" width="134" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Confirm Your Order"/>
                                 <connections>
@@ -1342,15 +1338,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="myReceiptView" destination="kQd-LE-ZjD" id="uKO-sT-Sh8"/>
                         <outlet property="orderReferenceTitle" destination="PtH-lY-GjN" id="cHu-GL-Qm9"/>
-                        <outlet property="receiptTextView" destination="okB-cA-x8R" id="0Vf-Wb-rcI"/>
                         <segue destination="Lc6-hu-Saq" kind="unwind" identifier="unwindToTabBar" unwindAction="unwindToTabBarWithSegue:" id="zfU-CB-aYz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcH-63-0xM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Lc6-hu-Saq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-132" y="1312"/>
+            <point key="canvasLocation" x="-132" y="1311.9940029985009"/>
         </scene>
         <!--FindCafe-->
         <scene sceneID="stk-5a-Qiz">
@@ -1404,7 +1400,7 @@
                                     <color key="backgroundColor" red="0.77692040044409005" green="0.77692040044409005" blue="0.77692040044409005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="cafeCell" rowHeight="91" id="Hb3-HA-Af8" customClass="CafeTableViewCell" customModule="MelbourneCafe" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="cafeCell" rowHeight="91" id="Hb3-HA-Af8" customClass="CafeTableViewCell" customModule="MelbourneCafe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hb3-HA-Af8" id="Ipr-HT-14t">
@@ -1457,6 +1453,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Find Your Cafe" image="CafeIcon" id="PBO-rp-d7N"/>
                     <connections>
+                        <outlet property="cafeSearchBar" destination="cY9-iT-NPX" id="Ijm-1D-tFG"/>
                         <outlet property="cafeTableView" destination="ZyG-YO-bCB" id="Oln-fs-PVI"/>
                         <outlet property="mapButton" destination="I7i-5F-Znc" id="n9L-6j-Ol0"/>
                         <outlet property="orderMethodButton" destination="ZTh-lB-AZa" id="JuE-V9-OTx"/>

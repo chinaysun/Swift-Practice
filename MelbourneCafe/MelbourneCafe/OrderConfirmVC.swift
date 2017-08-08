@@ -11,9 +11,9 @@ import UIKit
 class OrderConfirmVC: UIViewController
 {
     
-    @IBOutlet weak var receiptTextView: UITextView!
     
     @IBOutlet weak var orderReferenceTitle: UINavigationItem!
+    @IBOutlet weak var myReceiptView: ReceiptView!
     
     var myCart:Cart!
     var confirmDate:Date!
@@ -23,7 +23,8 @@ class OrderConfirmVC: UIViewController
         super.viewDidLoad()
 
         self.orderReferenceTitle.title = "Ref#:" + self.myCart.referenceNumber
-        self.receiptTextView.text = self.myCart.generateReceipt()
+        myReceiptView.cart = myCart
+        
         self.confirmDate = Date()
         
         //Don't need to check if the user is logged because only logged user can access this view

@@ -19,13 +19,6 @@ class ReceiptView: UIView {
     }
     
     
-    var color:UIColor = UIColor(red: 173, green: 238, blue: 88, alpha: 1.0)
-    {
-        didSet
-        {
-            self.backgroundColor = color
-        }
-    }
     
     private struct ReceiptLayout
     {
@@ -65,9 +58,17 @@ class ReceiptView: UIView {
         let shoppingListView = UIView(frame: CGRect(origin: startPoint, size: viewSize))
         addCategoryLine(superView: shoppingListView)
         
+        var currentYposition:CGFloat = 0.0
+        
         for item in cart.orderList
         {
-            addOrderLine(orderItem: item, superView: shoppingListView)
+            currentYposition += 20.0
+            let isCustomerSpecialNote = addOrderLine(orderItem: item, superView: shoppingListView, yPosition: currentYposition)
+            
+            if isCustomerSpecialNote
+            {
+                currentYposition += 10.0
+            }
         }
         
         
@@ -75,8 +76,54 @@ class ReceiptView: UIView {
         
     }
     
-    private func addOrderLine(orderItem:OrderItem,superView:UIView)
+    private func addOrderLine(orderItem:OrderItem,superView:UIView,yPosition:CGFloat)->Bool
     {
+        let itemWidth:CGFloat = superView.frame.width * 0.4
+        let othersWidth:CGFloat = superView.frame.width * 0.2
+        var height:CGFloat = 20.0
+        let fontSize:CGFloat = 11.0
+        
+        var isCustomerSpecialNote:Bool = false
+        
+        if !orderItem.customerSpecialNote.isEmpty
+        {
+            height = 30.0
+            isCustomerSpecialNote = true
+
+        }
+        
+        let itemLabel = UILabel(frame: CGRect(x: 0.0, y: yPosition, width: itemWidth, height: height))
+        itemLabel.font = itemLabel.font.withSize(fontSize)
+        
+        if isCustomerSpecialNote
+        {
+            itemLabel.text = orderItem.productName + "\n p.s." + orderItem.customerSpecialNote
+            itemLabel.numberOfLines = 2
+            
+        }else
+        {
+            itemLabel.text = orderItem.productName
+        }
+        
+        
+        superView.addSubview(itemLabel)
+        
+        let quantityLabel = UILabel(frame: CGRect(x: itemWidth, y: yPosition, width: othersWidth, height: height))
+        quantityLabel.text = String(orderItem.quantity)
+        quantityLabel.font = quantityLabel.font.withSize(fontSize)
+        superView.addSubview(quantityLabel)
+        
+        let priceLabel = UILabel(frame: CGRect(x: itemWidth + othersWidth, y: yPosition, width: othersWidth, height: height))
+        priceLabel.text = "$" + String(orderItem.price)
+        priceLabel.font = priceLabel.font.withSize(fontSize)
+        superView.addSubview(priceLabel)
+        
+        let subTotalLabel = UILabel(frame: CGRect(x: itemWidth + 2 * othersWidth, y: yPosition, width: othersWidth, height: height))
+        subTotalLabel.text = "$" + String(orderItem.subTotalPrice)
+        subTotalLabel.font = subTotalLabel.font.withSize(fontSize)
+        superView.addSubview(subTotalLabel)
+        
+        return isCustomerSpecialNote
         
     }
     
@@ -103,7 +150,7 @@ class ReceiptView: UIView {
         priceLabel.font = priceLabel.font.withSize(fontSize)
         superView.addSubview(priceLabel)
         
-        let subTotalLabel = UILabel(frame: CGRect(x: itemWidth + othersWidth, y: 0.0, width: othersWidth, height: height))
+        let subTotalLabel = UILabel(frame: CGRect(x: itemWidth +  2 * othersWidth, y: 0.0, width: othersWidth, height: height))
         subTotalLabel.text = "Subtotal"
         subTotalLabel.font = subTotalLabel.font.withSize(fontSize)
         superView.addSubview(subTotalLabel)
@@ -111,11 +158,42 @@ class ReceiptView: UIView {
         
     }
     
+    private func createSumLine(anchorPoint:CGPoint) ->[UIView]
+    {
+        let width:CGFloat = (bounds.size.width - 2 * ReceiptLayout.paddingToLeft)/2
+        let height:CGFloat = 20.0
+        let fontSize:CGFloat = 12.0
+        
+        let totalItemLabel = UILabel(frame: CGRect(x: anchorPoint.x, y: anchorPoint.y, width: width, height: height))
+        totalItemLabel.font = totalItemLabel.font.withSize(fontSize)
+        totalItemLabel.text = "Total Item: " + String(cart.totalQuantity)
+        
+        let totalPriceLabel = UILabel(frame: CGRect(x: anchorPoint.x + width, y: anchorPoint.y, width: width, height: height))
+        totalPriceLabel.font = totalPriceLabel.font.withSize(fontSize)
+        totalPriceLabel.text = "Total Price: $" + String(cart.totalPrice)
+        
+        return [totalItemLabel,totalPriceLabel]
+        
+    }
+    
+    private func addThanksInfo(anchorPoint:CGPoint)->UILabel
+    {
+        let width:CGFloat = 200.0
+        let height:CGFloat = 20.0
+        let fontSize:CGFloat = 12.0
+        
+        let thanksLabel = UILabel(frame: CGRect(x: anchorPoint.x, y: anchorPoint.y, width: width, height: height))
+        thanksLabel.text = "Thanks for your chosing!!!"
+        thanksLabel.font = thanksLabel.font.withSize(fontSize)
+        
+        
+        return thanksLabel
+    }
+    
     private func setupView()
     {
-        self.backgroundColor = color
         
-        var anchorPoint:CGPoint = CGPoint(x: ReceiptLayout.paddingToTop, y: ReceiptLayout.paddingToTop)
+        var anchorPoint:CGPoint = CGPoint(x: ReceiptLayout.paddingToLeft, y: ReceiptLayout.paddingToTop)
         
         let shopInfoLabel = createShopInfoLabel(anchorPoint: anchorPoint)
         self.addSubview(shopInfoLabel)
@@ -125,9 +203,30 @@ class ReceiptView: UIView {
         
         anchorPoint.y += ReceiptLayout.gapBetweenSections
         
+        let shopListView = createShoppingList(anchorPoint: anchorPoint)
         
+        anchorPoint.y += shopListView.frame.height + 2 * ReceiptLayout.gapBetweenSections
         
+        self.addSubview(shopListView)
+        self.addSubview(createSeperateView(anchorPoint: anchorPoint))
         
+        anchorPoint.y += ReceiptLayout.gapBetweenSections
+        
+        let sumLine = createSumLine(anchorPoint: anchorPoint)
+        
+        for view in sumLine
+        {
+            self.addSubview(view)
+        }
+        
+        anchorPoint.y += (sumLine.first?.frame.size.height)! + ReceiptLayout.gapBetweenSections
+        
+        self.addSubview(createSeperateView(anchorPoint: anchorPoint))
+        
+        anchorPoint.y += ReceiptLayout.gapBetweenSections
+        
+        let thanksLabel = self.addThanksInfo(anchorPoint: anchorPoint)
+        self.addSubview(thanksLabel)
         
         
     }

@@ -225,69 +225,7 @@ class Cart:QuantityModification
         
     }
     
-    func generateReceipt()->String
-    {
-        var receipt:String = ""
-        
-        
-        let space:String = String(repeating: " ", count: 6)
-        let productInfoTitle = "Item" + String(repeating: space, count: 8) + "Quantity" + space + "Price" + space + "SubTotal"
-        let seperateLine:String = String(repeating: "- ", count: (productInfoTitle.characters.count / 2) ) + "\n"
-        receipt = self._shopDescription + "\n" + seperateLine + productInfoTitle + "\n"
-        
-        //40 characters from Item to Quantity
-        //14 characters from Quantity to Price
-        //11 characters from Price to SubTotal
-        
-        let charactersFromItemToQuantity = 40
-        let charactersFromQuantityToPrice = 14
-        let charactersFromPriceToSubTotal = 11
-        
-        for eachItem in self.orderList
-        {
-            var itemInLine:String = ""
-            
-            let itemDescription = eachItem.orderItemDescription
-            
-            itemInLine = itemDescription + String(repeating: " ", count: charactersFromItemToQuantity - itemDescription.characters.count)
-     
-            let quantity = String(eachItem.quantity)
-            itemInLine = itemInLine + quantity + String(repeating: " ", count: charactersFromQuantityToPrice - quantity.characters.count)
-            
-            let price = "$" + String(eachItem.price)
-            itemInLine = itemInLine + price + String(repeating: " ", count: charactersFromPriceToSubTotal - price.characters.count)
-            
-            let subTotal = "$" + String(eachItem.subTotalPrice)
-            itemInLine = itemInLine + subTotal + "\n"
-            
-            if eachItem.customerSpecialNote != ""
-            {
-                itemInLine += space + "p.s." + eachItem.customerSpecialNote + "\n"
-            }
-            
-            receipt += itemInLine
-            
-        }
-        
-        receipt += seperateLine
-        
-        receipt += "Sub Total (inc GST)" + String(repeating: " ", count: charactersFromItemToQuantity + charactersFromQuantityToPrice + charactersFromPriceToSubTotal)
-        receipt += "$" + String(self._totalPrice) + "\n"
-        
-        receipt += "GST(10%)" + String(repeating: " ", count: charactersFromItemToQuantity + charactersFromQuantityToPrice + charactersFromPriceToSubTotal) + space + space
-        receipt += "$" + String(format:"%.2f",self._totalPrice * 0.1) + "\n"
-        
-        receipt += seperateLine
-        receipt += "Totoal Price:" + String(repeating: " ", count: charactersFromItemToQuantity + charactersFromQuantityToPrice + charactersFromPriceToSubTotal) + space
-        receipt += "$" + String(format:"%.2f",self._totalPrice * 0.1 + self._totalPrice) + "\n"
-        
-        receipt += seperateLine + "Thank you for your choosing"
-        
-
-        return receipt
-    }
-    
-    
+       
     func confirmOrder(userID:String,createdTime:Date,complication:@escaping ()->())
     {
         self.orderTime = createdTime

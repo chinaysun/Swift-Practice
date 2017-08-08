@@ -148,12 +148,12 @@ class UserProfile
             "UserNewInfo":newInfo
         ]
         
+        
+        
         Alamofire.request(USER_UPDATE_INFO_URL,method:.post,parameters:parameters).responseJSON{
             response
             
             in
-            
-            print(response)
             
             switch response.result
             {
@@ -201,8 +201,7 @@ class UserProfile
             response
             
             in
-            
-            print(response)
+        
             
             var runTheComplicationFunction = true
             
