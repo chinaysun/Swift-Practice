@@ -8,13 +8,52 @@
 
 import UIKit
 
-class ViewController: UIViewController,UIDropInteractionDelegate {
+class ViewController: UIViewController,UIDropInteractionDelegate,UIDragInteractionDelegate {
+    
+    
+    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        
+        let touchedPoint = session.location(in: self.view)
+        if let touchedImageView = self.view.hitTest(touchedPoint, with: nil) as? UIImageView {
+            
+            let touchedImage = touchedImageView.image
+            
+            let itemProvider = NSItemProvider(object: touchedImage!)
+            let dragItem = UIDragItem(itemProvider: itemProvider)
+            //associate the view to the dragged item, since preview function requires a view
+            dragItem.localObject = touchedImageView
+            return [dragItem]
+        }
+        
+        return []
+    }
+    
+    // the preview of dragging
+    func dragInteraction(_ interaction: UIDragInteraction, previewForLifting item: UIDragItem, session: UIDragSession) -> UITargetedDragPreview? {
+        return UITargetedDragPreview(view: item.localObject as! UIView)
+    }
+    
+    //remove the duplicated item when lift
+    func dragInteraction(_ interaction: UIDragInteraction, willAnimateLiftWith animator: UIDragAnimating, session: UIDragSession) {
+        session.items.forEach { (dragItem) in
+            if let touchedImageView = dragItem.localObject as? UIView
+            {
+                touchedImageView.removeFromSuperview()
+            }
+        }
+    }
+    
+    //If the dragged item out of screen, then the cancel function will be called
+    func dragInteraction(_ interaction: UIDragInteraction, item: UIDragItem, willAnimateCancelWith animator: UIDragAnimating) {
+        self.view.addSubview(item.localObject as! UIView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         view.addInteraction(UIDropInteraction(delegate: self))
+        view.addInteraction(UIDragInteraction(delegate: self))
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
@@ -33,6 +72,7 @@ class ViewController: UIViewController,UIDropInteractionDelegate {
             
                 DispatchQueue.main.async {
                     let imageView = UIImageView(image: draggedImage)
+                    imageView.isUserInteractionEnabled = true
                     self.view.addSubview(imageView)
                     imageView.frame = CGRect(x: 0, y: 0, width: draggedImage.size.width, height: draggedImage.size.height)
                     
@@ -45,10 +85,13 @@ class ViewController: UIViewController,UIDropInteractionDelegate {
     }
 
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        
+        //most time we use copy, and move represents moving one from an app to other
         return UIDropProposal(operation: .copy)
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        //if we drag an image, the following method will return true
         return session.canLoadObjects(ofClass: UIImage.self)
     }
 
