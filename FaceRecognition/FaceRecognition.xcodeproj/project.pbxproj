@@ -1,0 +1,345 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8C08E7931F8626FC00683729 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C08E7921F8626FC00683729 /* AppDelegate.swift */; };
+		8C08E7981F8626FC00683729 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C08E7961F8626FC00683729 /* Main.storyboard */; };
+		8C08E79A1F8626FC00683729 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C08E7991F8626FC00683729 /* Assets.xcassets */; };
+		8C08E79D1F8626FC00683729 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C08E79B1F8626FC00683729 /* LaunchScreen.storyboard */; };
+		8C08E7A51F86286700683729 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C08E79E1F8626FC00683729 /* Info.plist */; };
+		8C08E7A81F86310200683729 /* FacealbumCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C08E7A71F86310200683729 /* FacealbumCVC.swift */; };
+		8C08E7AA1F863FDE00683729 /* PhotosCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C08E7A91F863FDE00683729 /* PhotosCVC.swift */; };
+		8C08E7AC1F874E7D00683729 /* LineLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C08E7AB1F874E7D00683729 /* LineLayout.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8C08E78F1F8626FC00683729 /* FaceRecognition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceRecognition.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C08E7921F8626FC00683729 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8C08E7971F8626FC00683729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8C08E7991F8626FC00683729 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8C08E79C1F8626FC00683729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8C08E79E1F8626FC00683729 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C08E7A71F86310200683729 /* FacealbumCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacealbumCVC.swift; sourceTree = "<group>"; };
+		8C08E7A91F863FDE00683729 /* PhotosCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCVC.swift; sourceTree = "<group>"; };
+		8C08E7AB1F874E7D00683729 /* LineLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineLayout.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8C08E78C1F8626FC00683729 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8C08E7861F8626FC00683729 = {
+			isa = PBXGroup;
+			children = (
+				8C08E7911F8626FC00683729 /* FaceRecognition */,
+				8C08E7901F8626FC00683729 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8C08E7901F8626FC00683729 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8C08E78F1F8626FC00683729 /* FaceRecognition.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8C08E7911F8626FC00683729 /* FaceRecognition */ = {
+			isa = PBXGroup;
+			children = (
+				8C08E7A61F86290F00683729 /* Supporting Files */,
+				8C08E7961F8626FC00683729 /* Main.storyboard */,
+				8C08E7A71F86310200683729 /* FacealbumCVC.swift */,
+				8C08E7A91F863FDE00683729 /* PhotosCVC.swift */,
+				8C08E7AB1F874E7D00683729 /* LineLayout.swift */,
+			);
+			path = FaceRecognition;
+			sourceTree = "<group>";
+		};
+		8C08E7A61F86290F00683729 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C08E79B1F8626FC00683729 /* LaunchScreen.storyboard */,
+				8C08E79E1F8626FC00683729 /* Info.plist */,
+				8C08E7921F8626FC00683729 /* AppDelegate.swift */,
+				8C08E7991F8626FC00683729 /* Assets.xcassets */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8C08E78E1F8626FC00683729 /* FaceRecognition */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C08E7A11F8626FC00683729 /* Build configuration list for PBXNativeTarget "FaceRecognition" */;
+			buildPhases = (
+				8C08E78B1F8626FC00683729 /* Sources */,
+				8C08E78C1F8626FC00683729 /* Frameworks */,
+				8C08E78D1F8626FC00683729 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FaceRecognition;
+			productName = FaceRecognition;
+			productReference = 8C08E78F1F8626FC00683729 /* FaceRecognition.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8C08E7871F8626FC00683729 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Yu Sun";
+				TargetAttributes = {
+					8C08E78E1F8626FC00683729 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8C08E78A1F8626FC00683729 /* Build configuration list for PBXProject "FaceRecognition" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8C08E7861F8626FC00683729;
+			productRefGroup = 8C08E7901F8626FC00683729 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8C08E78E1F8626FC00683729 /* FaceRecognition */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8C08E78D1F8626FC00683729 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C08E7A51F86286700683729 /* Info.plist in Resources */,
+				8C08E79D1F8626FC00683729 /* LaunchScreen.storyboard in Resources */,
+				8C08E79A1F8626FC00683729 /* Assets.xcassets in Resources */,
+				8C08E7981F8626FC00683729 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8C08E78B1F8626FC00683729 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C08E7A81F86310200683729 /* FacealbumCVC.swift in Sources */,
+				8C08E7AC1F874E7D00683729 /* LineLayout.swift in Sources */,
+				8C08E7931F8626FC00683729 /* AppDelegate.swift in Sources */,
+				8C08E7AA1F863FDE00683729 /* PhotosCVC.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8C08E7961F8626FC00683729 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8C08E7971F8626FC00683729 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8C08E79B1F8626FC00683729 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8C08E79C1F8626FC00683729 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8C08E79F1F8626FC00683729 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8C08E7A01F8626FC00683729 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8C08E7A21F8626FC00683729 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 88JGBRLZ4C;
+				INFOPLIST_FILE = FaceRecognition/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AusYSun.FaceRecognition;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8C08E7A31F8626FC00683729 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 88JGBRLZ4C;
+				INFOPLIST_FILE = FaceRecognition/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AusYSun.FaceRecognition;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8C08E78A1F8626FC00683729 /* Build configuration list for PBXProject "FaceRecognition" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C08E79F1F8626FC00683729 /* Debug */,
+				8C08E7A01F8626FC00683729 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C08E7A11F8626FC00683729 /* Build configuration list for PBXNativeTarget "FaceRecognition" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C08E7A21F8626FC00683729 /* Debug */,
+				8C08E7A31F8626FC00683729 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8C08E7871F8626FC00683729 /* Project object */;
+}
