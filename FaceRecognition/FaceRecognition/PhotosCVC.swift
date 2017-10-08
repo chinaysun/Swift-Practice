@@ -12,9 +12,19 @@ class PhotosCVC: UICollectionViewCell {
     
     var albumController:FacealbumCVC?
     
+    let spinner:UIActivityIndicatorView = {
+        
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.hidesWhenStopped = true
+        return spinner
+        
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(imageView)
+        self.addSubview(spinner)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,6 +58,7 @@ class PhotosCVC: UICollectionViewCell {
     
     @objc func handleFaceDetectionTap(tapGasture:UITapGestureRecognizer)
     {
+        
         if imageView.subviews.count > 0
         {
             imageView.subviews.forEach({ (view) in
@@ -57,7 +68,7 @@ class PhotosCVC: UICollectionViewCell {
         
         if let imageView = tapGasture.view as? UIImageView
         {
-            albumController?.handleFaceDetection(imageView:imageView)
+            albumController?.handleFaceDetection(imageView:imageView,spinner:spinner)
         }
     }
     
@@ -74,6 +85,12 @@ class PhotosCVC: UICollectionViewCell {
         imageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         imageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: scaleHeight).isActive = true
+        
+        //add spinner
+        spinner.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        spinner.bottomAnchor.constraint(equalTo: imageView.topAnchor).isActive = true 
+        spinner.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        spinner.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
     }
     
