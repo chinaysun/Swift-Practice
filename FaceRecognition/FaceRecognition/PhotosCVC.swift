@@ -10,6 +10,7 @@ import UIKit
 
 class PhotosCVC: UICollectionViewCell {
     
+    var albumController:FacealbumCVC?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,21 +29,41 @@ class PhotosCVC: UICollectionViewCell {
         }
     }
     
-    let imageView:UIImageView = {
+    lazy var imageView:UIImageView = {
         
         let photoView = UIImageView()
         photoView.translatesAutoresizingMaskIntoConstraints = false
         photoView.contentMode = .scaleAspectFit
         photoView.layer.cornerRadius = 5
         photoView.clipsToBounds = true
+        
+        photoView.isUserInteractionEnabled = true
+        
+        //remember: access to self need to set var as lazy
+        photoView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                              action: #selector(handleFaceDetectionTap)))
         return photoView
         
     }()
     
+    @objc func handleFaceDetectionTap(tapGasture:UITapGestureRecognizer)
+    {
+        if imageView.subviews.count > 0
+        {
+            imageView.subviews.forEach({ (view) in
+                view.removeFromSuperview()
+            })
+        }
+        
+        if let imageView = tapGasture.view as? UIImageView
+        {
+            albumController?.handleFaceDetection(imageView:imageView)
+        }
+    }
+    
     
     private func updateUI()
     {
-        print("update ui")
         //image view
         guard let image =  UIImage(named: imageName!) else { return }
         let scaleHeight:CGFloat = self.frame.width / image.size.width * image.size.height
@@ -53,8 +74,6 @@ class PhotosCVC: UICollectionViewCell {
         imageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         imageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: scaleHeight).isActive = true
-        
-        
         
     }
     
