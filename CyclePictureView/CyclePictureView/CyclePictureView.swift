@@ -72,11 +72,10 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
         }
     }
     
-    var pageControllerIsHidden:Bool?
+    var pageControllerIsHidden:Bool = false
     {
         didSet
         {
-            guard let isHidden = pageControllerIsHidden else { return }
             pageController.isHidden = isHidden
         }
     }
@@ -97,31 +96,73 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
     //MARK:- Scroll View Functions
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        // need check if the page controll is hiden
-        guard let isHidden = self.pageControllerIsHidden else { return }
-        
         if !isHidden
         {
             //calculate the index
-            let offSetIndex = self.collectionView.contentOffset.x
+            var offSetIndex:Int = 0
+            
+            
+            if flowLayout.scrollDirection == .horizontal
+            {
+                // calculate index based on x
+                offSetIndex = Int(self.collectionView.contentOffset.x / flowLayout.itemSize.width)
+                
+            }else
+            {
+                offSetIndex = Int(self.collectionView.contentOffset.y / flowLayout.itemSize.height)
+            }
+            
+            let currentPage = pageController.currentPage
+            
+            //update currentpage of page controller
+            pageController.currentPage = currentPage != offSetIndex ? offSetIndex:currentPage
+            
+           
         }
-        
-        
         
     }
     
-    
-    
     //MARK:- Collection View
+    var itemWidth:CGFloat?
+    {
+        didSet
+        {
+            flowLayout.itemSize.width = itemWidth!
+        }
+    }
+    
+    var itemHeight:CGFloat?
+    {
+        didSet
+        {
+            flowLayout.itemSize.height = itemHeight!
+        }
+    }
+    
+    var scrollDirection:UICollectionViewScrollDirection?
+    {
+        didSet
+        {
+            flowLayout.scrollDirection = scrollDirection!
+        }
+    }
+    
+    private lazy var flowLayout:UICollectionViewFlowLayout = {
+       
+        let fl = UICollectionViewFlowLayout()
+        fl.scrollDirection = .horizontal
+        fl.minimumLineSpacing = 0
+        fl.itemSize = CGSize(width: self.frame.width, height: self.frame.height)
+        return fl
+        
+    }()
+    
+    
+    
+    
     private var cellReuseId:String = "pictureCell"
     
     private lazy var collectionView:UICollectionView = {
-        
-        // initialize layout
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 0
-        flowLayout.itemSize = CGSize(width: self.frame.width, height: self.frame.height)
         
         //create collection view
         let cv = UICollectionView(frame: self.frame, collectionViewLayout: flowLayout)
