@@ -62,6 +62,7 @@ class PictureCell: UICollectionViewCell {
     }()
     
     
+    
     //use for indicating downloading image from web
     private let spinner:UIActivityIndicatorView = {
        let aiv = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)

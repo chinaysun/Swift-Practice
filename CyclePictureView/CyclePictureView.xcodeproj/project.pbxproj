@@ -14,7 +14,6 @@
 		8CBA1C411F8B912B00440AD3 /* PictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA1C401F8B912B00440AD3 /* PictureCell.swift */; };
 		8CBA1C431F8BE5CC00440AD3 /* CyclePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA1C421F8BE5CC00440AD3 /* CyclePictureView.swift */; };
 		8CBA1C471F8C92A200440AD3 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA1C461F8C92A200440AD3 /* TestViewController.swift */; };
-		8CC697511F8D0606008A916C /* CyclyingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC697501F8D0606008A916C /* CyclyingProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		8CBA1C401F8B912B00440AD3 /* PictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCell.swift; sourceTree = "<group>"; };
 		8CBA1C421F8BE5CC00440AD3 /* CyclePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyclePictureView.swift; sourceTree = "<group>"; };
 		8CBA1C461F8C92A200440AD3 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		8CC697501F8D0606008A916C /* CyclyingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyclyingProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +63,6 @@
 				8CBA1C421F8BE5CC00440AD3 /* CyclePictureView.swift */,
 				8CBA1C401F8B912B00440AD3 /* PictureCell.swift */,
 				8CBA1C461F8C92A200440AD3 /* TestViewController.swift */,
-				8CC697501F8D0606008A916C /* CyclyingProtocol.swift */,
 			);
 			path = CyclePictureView;
 			sourceTree = "<group>";
@@ -156,7 +153,6 @@
 				8CBA1C431F8BE5CC00440AD3 /* CyclePictureView.swift in Sources */,
 				8CBA1C281F8B8F5D00440AD3 /* AppDelegate.swift in Sources */,
 				8CBA1C471F8C92A200440AD3 /* TestViewController.swift in Sources */,
-				8CC697511F8D0606008A916C /* CyclyingProtocol.swift in Sources */,
 				8CBA1C411F8B912B00440AD3 /* PictureCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

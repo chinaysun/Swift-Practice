@@ -24,6 +24,12 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
         pageController.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         pageController.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
+        //start timer
+        if self.autoScroll
+        {
+            setupTimer()
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -93,24 +99,73 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
         
     }()
     
-    //MARK:- Scroll View Functions
+    //MARK:- Scroll Views Functions
+    private weak var timer:Timer?
+    
+    var timeInterval:Double = 3.0
+    {
+        didSet
+        {
+            setupTimer()
+        }
+    }
+    
+    var autoScroll:Bool = true
+    {
+        didSet
+        {
+            if autoScroll
+            {
+                setupTimer()
+                
+            }else
+            {
+                timer?.invalidate()
+            }
+        }
+    }
+   
+    private func setupTimer()
+    {
+        timer?.invalidate()
+        
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(autoScrollPages), userInfo: nil, repeats: true)
+    }
+    
+    @objc func autoScrollPages()
+    {
+        let currentIndex = getCurrentIndex()
+        
+        var nextPosition:UICollectionViewScrollPosition = .right
+        var firstPosition:UICollectionViewScrollPosition = .left
+        
+        
+        //need to check here
+        if scrollDirection == .vertical
+        {
+            nextPosition = .bottom
+            firstPosition = .top
+        }
+        
+        if currentIndex + 1 < imageViewBackgroundColor.count
+        {
+            let nextPath = IndexPath(item: currentIndex + 1, section: 0)
+            collectionView.scrollToItem(at: nextPath, at:nextPosition ,animated: true)
+            
+        }else
+        {
+            let nextPath = IndexPath(item: 0, section: 0)
+            collectionView.scrollToItem(at: nextPath, at: firstPosition, animated: false)
+        }
+    }
+    
+    // update current page on pageController
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if !isHidden
         {
             //calculate the index
-            var offSetIndex:Int = 0
-            
-            
-            if flowLayout.scrollDirection == .horizontal
-            {
-                // calculate index based on x
-                offSetIndex = Int(self.collectionView.contentOffset.x / flowLayout.itemSize.width)
-                
-            }else
-            {
-                offSetIndex = Int(self.collectionView.contentOffset.y / flowLayout.itemSize.height)
-            }
+            let offSetIndex:Int = getCurrentIndex()
             
             let currentPage = pageController.currentPage
             
@@ -120,6 +175,23 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
            
         }
         
+    }
+    
+    private func getCurrentIndex()->Int
+    {
+        var offSetIndex:Int = 0
+        
+        if flowLayout.scrollDirection == .horizontal
+        {
+            // calculate index based on x
+            offSetIndex = Int(self.collectionView.contentOffset.x / flowLayout.itemSize.width)
+            
+        }else
+        {
+            offSetIndex = Int(self.collectionView.contentOffset.y / flowLayout.itemSize.height)
+        }
+        
+        return offSetIndex
     }
     
     //MARK:- Collection View
@@ -139,11 +211,11 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
         }
     }
     
-    var scrollDirection:UICollectionViewScrollDirection?
+    var scrollDirection:UICollectionViewScrollDirection = .horizontal
     {
         didSet
         {
-            flowLayout.scrollDirection = scrollDirection!
+            flowLayout.scrollDirection = scrollDirection
         }
     }
     
@@ -156,9 +228,6 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
         return fl
         
     }()
-    
-    
-    
     
     private var cellReuseId:String = "pictureCell"
     
