@@ -19,21 +19,35 @@ class PictureCell: UICollectionViewCell {
         }
     }
     
-    private func downloadImage(fromUrl:String)
+    private func downloadImage(fromUrl url:String)
     {
         spinner.startAnimating()
+        
+        guard let imageUrl = NSURL(string: url) else { return }
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute:{
+            
+            let contentOfURL = NSData(contentsOf: imageUrl as URL)
+            
+            DispatchQueue.main.async(execute:{
+                
+                if let imageData = contentOfURL {
+                    
+                    self.pictureImageView.image = UIImage(data: imageData as Data)
+                  
+                }else
+                {
+                    self.pictureImageView.image = self.placeholdImage
+                }
+                
+               self.spinner.stopAnimating()
+                
+            })
+            
+        })
     }
     
-    var localImage:UIImage?
-    {
-        didSet
-        {
-            guard let image = localImage else { return }
-            pictureImageView.image = image
-        }
-    }
-    
-    var placeholdImage:UIImage?
+    var placeholdImage:UIImage = UIImage(named: "image-not-found")!
     
     var imageAlpha:CGFloat = 1.0
     {
@@ -57,7 +71,6 @@ class PictureCell: UICollectionViewCell {
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.layer.cornerRadius = 3
         iv.clipsToBounds = true
-        iv.backgroundColor = UIColor.black
         return iv
     }()
     

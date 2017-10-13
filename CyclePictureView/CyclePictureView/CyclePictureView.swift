@@ -12,55 +12,68 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.addSubview(collectionView)
-        collectionView.frame = self.bounds
-        
-        self.addSubview(pageController)
-        
-        //ios x,y,w,h
-        pageController.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        pageController.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        pageController.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        pageController.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        
-        //start timer
-        if self.autoScroll
-        {
-            setupTimer()
-        }
-        
+        setupUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    override func awakeFromNib() {
+        setupUI()
+    }
     
-    /* use view to view delegate
-    var sourceController:UIViewController?
+    private func setupUI()
     {
-        didSet
+       
+        
+        self.addSubview(collectionView)
+        collectionView.frame = self.bounds
+        
+        //start timer
+        if self.autoScroll
         {
-            //assign the delegate/data source
-            guard let controllerDS = sourceController as? UICollectionViewDataSource,
-                let controllerCVD = sourceController as? UICollectionViewDelegate else { return }
-            collectionView.dataSource = controllerDS
-            collectionView.delegate = controllerCVD
+            setupTimer()
         }
     }
-    */
     
     var imageUrls = [String]()
     {
         didSet
         {
-            collectionView.reloadData()
+           reloadData()
         }
     }
     
-    var imageViewBackgroundColor:[UIColor] = [UIColor.black,UIColor.blue,UIColor.brown,UIColor.green]
+    private var pageControllerCenterAnchor:NSLayoutConstraint?
     
+    private func reloadData()
+    {
+        collectionView.reloadData()
+        
+        self.pageController.removeFromSuperview()
+        
+        if !pageControllerIsHidden && imageUrls.count > 1
+        {
+            setupPageController()
+        }
+        
+    }
+    
+    private func setupPageController()
+    {
+        self.addSubview(pageController)
+        //ios x,y,w,h - default is central
+        pageController.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        pageController.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        pageController.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        pageControllerCenterAnchor = pageController.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+        pageControllerCenterAnchor?.isActive = true
+        
+        updatePageControlAlinement()
+    }
+
     //MARK:- Page Controller
     var currentPageColor:UIColor?
     {
@@ -91,7 +104,7 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
         let pc = UIPageControl()
         pc.translatesAutoresizingMaskIntoConstraints = false
         pc.hidesForSinglePage = true
-        pc.numberOfPages = self.imageViewBackgroundColor.count
+        pc.numberOfPages = self.imageUrls.count
         pc.currentPageIndicatorTintColor = UIColor.orange
         pc.pageIndicatorTintColor = UIColor.gray
         pc.isUserInteractionEnabled = false
@@ -147,7 +160,7 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
             firstPosition = .top
         }
         
-        if currentIndex + 1 < imageViewBackgroundColor.count
+        if currentIndex + 1 < imageUrls.count
         {
             let nextPath = IndexPath(item: currentIndex + 1, section: 0)
             collectionView.scrollToItem(at: nextPath, at:nextPosition ,animated: true)
@@ -175,6 +188,17 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
            
         }
         
+    }
+    
+    //stop timer when drag
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        timer?.invalidate()
+    }
+    
+    
+    //start timer again
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        setupTimer()
     }
     
     private func getCurrentIndex()->Int
@@ -224,7 +248,7 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
         let fl = UICollectionViewFlowLayout()
         fl.scrollDirection = .horizontal
         fl.minimumLineSpacing = 0
-        fl.itemSize = CGSize(width: self.frame.width, height: self.frame.height)
+        fl.itemSize = CGSize(width: self.bounds.width, height: self.bounds.height)
         return fl
         
     }()
@@ -253,18 +277,61 @@ class CyclePictureView: UIView,UICollectionViewDelegate,UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageViewBackgroundColor.count
+        return imageUrls.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseId, for: indexPath) as! PictureCell
-        cell.pictureImageView.backgroundColor = imageViewBackgroundColor[indexPath.row]
+        
+        if cell.imageUrl != imageUrls[indexPath.row]
+        {
+           cell.imageUrl = imageUrls[indexPath.row]
+        }
         
         return cell
     }
     
-
+    
+    //MARK:- page control alinement
+    enum PageControlAlinement
+    {
+        case Left
+        case Centre
+        case Right
+    }
+    
+    var pageControlAlinement:PageControlAlinement = .Centre
+    {
+        didSet
+        {
+            updatePageControlAlinement()
+        }
+    }
+    
+    private func  updatePageControlAlinement()
+    {
+        
+        if pageControllerCenterAnchor == nil { return }
+        
+        //close default constraint
+        pageControllerCenterAnchor?.isActive = false
+        
+        //new constraint base on setting
+        switch pageControlAlinement {
+        case .Centre:
+            pageControllerCenterAnchor = pageController.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            pageControllerCenterAnchor?.isActive = true
+        case .Left:
+            pageControllerCenterAnchor = pageController.leftAnchor.constraint(equalTo: self.leftAnchor)
+            pageControllerCenterAnchor?.isActive = true
+        case .Right:
+            pageControllerCenterAnchor = pageController.rightAnchor.constraint(equalTo: self.rightAnchor)
+            pageControllerCenterAnchor?.isActive = true 
+        }
+        
+    }
+    
     
 }
 
