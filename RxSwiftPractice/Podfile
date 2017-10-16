@@ -1,0 +1,12 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'RxSwiftPractice' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for RxSwiftPractice
+  pod 'RxSwift', :git => 'git@github.com:ReactiveX/RxSwift.git', :tag => '4.0.0-beta.1'#, '3.6.1'
+  pod 'RxCocoa', :git => 'git@github.com:ReactiveX/RxSwift.git', :tag => '4.0.0-beta.1'#, '3.6.1'
+
+end
