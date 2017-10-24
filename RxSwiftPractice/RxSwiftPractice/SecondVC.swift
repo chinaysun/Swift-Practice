@@ -9,6 +9,10 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Differentiator
+import RxDataSources
+
+
 
 class SecondVC: UIViewController {
 
@@ -57,10 +61,6 @@ class SecondVC: UIViewController {
         
     }()
     
-    var dataSource:[String] = ["First","Second","Third"]
-    
-    let items = Observable.just(["First","Second","Third"])
-    
     lazy var tableView:UITableView = {
        
         let cellType = UITableViewCell.self
@@ -85,6 +85,53 @@ class SecondVC: UIViewController {
         
         
     }()
+
+    lazy var collectionView: UICollectionView = {
+       
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: 286, height: 160)
+        flowLayout.footerReferenceSize = CGSize(width: 80, height: 160)
+        flowLayout.scrollDirection = .horizontal
+    
+        let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero,
+                                                                collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        let cellType = UICollectionViewCell.self
+        let cellID = "cellID"
+        let footerID = "footerID"
+        collectionView.register(cellType, forCellWithReuseIdentifier: cellID)
+        collectionView.register(cellType, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerID)
+        
+        let dataSource = RxCollectionViewSectionedReloadDataSource<MySection>(configureCell: {ds,cv,ip,item in
+            let cell = cv.dequeueReusableCell(withReuseIdentifier: cellID, for: ip)
+            cell.backgroundColor = item
+            return cell
+        }, configureSupplementaryView: { ds,cv,kind,ip in
+            
+            let footer = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerID, for: ip)
+            footer.backgroundColor = UIColor.red
+            return footer
+        })
+        
+        // bind data source
+        let sections = [
+            MySection(header: "Section 1", items: [UIColor.blue,UIColor.brown]),
+            MySection(header: "Section 2", items: [UIColor.darkGray,UIColor.yellow])
+        ]
+        
+        Observable.just(sections)
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        //don need this if you set up the reference size in flowlay out
+//        collectionView.rx.setDelegate(self)
+//            .disposed(by: disposeBag)
+
+        
+        return collectionView
+    }()
     
 
     override func viewDidLoad() {
@@ -98,7 +145,7 @@ class SecondVC: UIViewController {
         textAndButtonContainer.addSubview(backButton)
         textAndButtonContainer.addSubview(addItem)
         view.addSubview(tableView)
-        
+        view.addSubview(collectionView)
         
         layoutScreen()
         bindViewModel()
@@ -125,7 +172,11 @@ class SecondVC: UIViewController {
             addItem.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             addItem.widthAnchor.constraint(equalToConstant: 100),
             addItem.heightAnchor.constraint(equalToConstant: 50),
-            addItem.topAnchor.constraint(equalTo: backButton.bottomAnchor)
+            addItem.topAnchor.constraint(equalTo: backButton.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 160),
+            collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
         
     }
@@ -142,3 +193,12 @@ class SecondVC: UIViewController {
     }
 
 }
+
+//extension SecondVC: UICollectionViewDelegateFlowLayout
+//{
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+//        return CGSize(width: 80, height: collectionView.frame.height)
+//    }
+//
+//}
+

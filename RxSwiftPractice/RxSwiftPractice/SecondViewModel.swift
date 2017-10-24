@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import RxDataSources
 
 class SecondViewModel
 {
@@ -35,8 +36,24 @@ class SecondViewModel
         
     }
     
+}
+
+struct MySection {
+    var header:String
+    var items:[Item]
+}
+
+extension MySection: SectionModelType {
+    typealias Item = UIColor
     
+    var identify: String {
+        return header
+    }
     
+    init(original: MySection, items: [Item]) {
+        self = original
+        self.items = items
+    }
     
     
 }

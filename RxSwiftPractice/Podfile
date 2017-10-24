@@ -8,5 +8,6 @@ target 'RxSwiftPractice' do
   # Pods for RxSwiftPractice
   pod 'RxSwift', :git => 'git@github.com:ReactiveX/RxSwift.git', :tag => '4.0.0-beta.1'#, '3.6.1'
   pod 'RxCocoa', :git => 'git@github.com:ReactiveX/RxSwift.git', :tag => '4.0.0-beta.1'#, '3.6.1'
+  pod 'RxDataSources', '~> 3.0'
 
 end

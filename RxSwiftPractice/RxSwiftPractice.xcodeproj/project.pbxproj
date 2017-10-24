@@ -16,6 +16,8 @@
 		A80DFA071F957967005F7B5D /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80DFA081F957967005F7B5D /* RxSwift.framework */; };
 		A80DFA0A1F9579CF005F7B5D /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80DFA091F9579CF005F7B5D /* SecondVC.swift */; };
 		A80DFA0D1F957F33005F7B5D /* FirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80DFA0C1F957F33005F7B5D /* FirstVC.swift */; };
+		A83BA8C31F9EC03E00FA665A /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83BA8C41F9EC03E00FA665A /* RxDataSources.framework */; };
+		A83BA8C51F9EC04300FA665A /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83BA8C61F9EC04300FA665A /* Differentiator.framework */; };
 		A8C0542F1F95871A001E9F57 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C0542E1F95871A001E9F57 /* SecondViewModel.swift */; };
 		A8C054311F95A7AE001E9F57 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C054301F95A7AE001E9F57 /* FirstViewModel.swift */; };
 		A8C054331F95BC25001E9F57 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C054321F95BC25001E9F57 /* Extension.swift */; };
@@ -37,6 +39,8 @@
 		A80DFA081F957967005F7B5D /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A80DFA091F9579CF005F7B5D /* SecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondVC.swift; sourceTree = "<group>"; };
 		A80DFA0C1F957F33005F7B5D /* FirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstVC.swift; sourceTree = "<group>"; };
+		A83BA8C41F9EC03E00FA665A /* RxDataSources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxDataSources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A83BA8C61F9EC04300FA665A /* Differentiator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Differentiator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C0542E1F95871A001E9F57 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
 		A8C054301F95A7AE001E9F57 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
 		A8C054321F95BC25001E9F57 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A83BA8C51F9EC04300FA665A /* Differentiator.framework in Frameworks */,
+				A83BA8C31F9EC03E00FA665A /* RxDataSources.framework in Frameworks */,
 				A80DFA071F957967005F7B5D /* RxSwift.framework in Frameworks */,
 				A80DFA051F957962005F7B5D /* RxCocoa.framework in Frameworks */,
 				C62546E2FB3EFD377F3A7EE4 /* Pods_RxSwiftPractice.framework in Frameworks */,
@@ -114,6 +120,8 @@
 		AB7F17CFD0CA78B9CC4C2EAA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A83BA8C61F9EC04300FA665A /* Differentiator.framework */,
+				A83BA8C41F9EC03E00FA665A /* RxDataSources.framework */,
 				A80DFA081F957967005F7B5D /* RxSwift.framework */,
 				A80DFA061F957962005F7B5D /* RxCocoa.framework */,
 				8CB8F2791F94BB6900470972 /* RxSwift.framework */,
@@ -219,12 +227,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RxSwiftPractice/Pods-RxSwiftPractice-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
