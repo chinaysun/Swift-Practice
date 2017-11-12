@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C1637EF1FB87A880094951E /* Cars.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8C1637EC1FB87A880094951E /* Cars.mlmodel */; };
 		8C4768901FB1795E00520D76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C47688F1FB1795E00520D76 /* AppDelegate.swift */; };
 		8C4768921FB1795E00520D76 /* SimpleDragAndDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4768911FB1795E00520D76 /* SimpleDragAndDrop.swift */; };
 		8C4768951FB1795E00520D76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4768931FB1795E00520D76 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C1637EA1FB87A880094951E /* convert_cars.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = convert_cars.py; sourceTree = "<group>"; };
+		8C1637EB1FB87A880094951E /* cars.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cars.csv; sourceTree = "<group>"; };
+		8C1637EC1FB87A880094951E /* Cars.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Cars.mlmodel; sourceTree = "<group>"; };
 		8C47688C1FB1795E00520D76 /* NewFeaturesLearning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewFeaturesLearning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C47688F1FB1795E00520D76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C4768911FB1795E00520D76 /* SimpleDragAndDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDragAndDrop.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -35,6 +39,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C1637E81FB8701F0094951E /* TradeMyTesla */ = {
+			isa = PBXGroup;
+			children = (
+				8C1637E91FB87A470094951E /* Model */,
+			);
+			path = TradeMyTesla;
+			sourceTree = "<group>";
+		};
+		8C1637E91FB87A470094951E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8C1637EB1FB87A880094951E /* cars.csv */,
+				8C1637EC1FB87A880094951E /* Cars.mlmodel */,
+				8C1637EA1FB87A880094951E /* convert_cars.py */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8C4768831FB1795E00520D76 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +76,7 @@
 		8C47688E1FB1795E00520D76 /* NewFeaturesLearning */ = {
 			isa = PBXGroup;
 			children = (
+				8C1637E81FB8701F0094951E /* TradeMyTesla */,
 				8C4768A21FB179E100520D76 /* SImpleDragAndDrop */,
 				8C4768A11FB1796F00520D76 /* Supporting Files */,
 				8C47688F1FB1795E00520D76 /* AppDelegate.swift */,
@@ -154,6 +177,7 @@
 			files = (
 				8C4768921FB1795E00520D76 /* SimpleDragAndDrop.swift in Sources */,
 				8C4768901FB1795E00520D76 /* AppDelegate.swift in Sources */,
+				8C1637EF1FB87A880094951E /* Cars.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
