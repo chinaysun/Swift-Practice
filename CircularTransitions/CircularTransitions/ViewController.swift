@@ -41,6 +41,8 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         transition.startingPoint = menuButton.center
         transition.circleColor = menuButton.backgroundColor!
         
+        print("dismiss")
+        
         return transition
     }
 
