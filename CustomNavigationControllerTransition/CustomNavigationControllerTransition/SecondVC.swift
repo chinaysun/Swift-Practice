@@ -12,12 +12,8 @@ class SecondVC: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     
-    var selectedImageName: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imageView.image = UIImage(named: selectedImageName!)
         
     }
 

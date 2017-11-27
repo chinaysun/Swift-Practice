@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate {
     
     var imageList: [String] = Array(repeating: "image", count: 36)
     
@@ -55,11 +55,16 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     
     private var selectedImageName: String?
+    private var selectedFrame: CGRect?
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
         let index = indexPath.row % 6
         let imageName = "\(imageList[indexPath.row])\(index)"
         selectedImageName = imageName
+        
+        let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
+        selectedFrame = collectionView.convert(theAttributes.frame, to: collectionView.superview)
         
         performSegue(withIdentifier: "showImage", sender: self)
         
@@ -67,6 +72,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.delegate = self
         
         view.addSubview(collectionView)
         
@@ -78,12 +85,28 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             ])
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showImage" {
-            if let destinationVC = segue.destination as? SecondVC {
-                destinationVC.selectedImageName = selectedImageName
-            }
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        guard let frame = self.selectedFrame else { return nil }
+        guard let song = UIImage(named: selectedImageName!) else { return nil}
+        
+        
+        let customAnimator = CustomAnimator()
+        customAnimator.duration = TimeInterval(UINavigationControllerHideShowBarDuration)
+        customAnimator.originFrame = frame
+        customAnimator.image = song
+        
+        switch operation {
+        case .push:
+            print("push")
+            customAnimator.isPresenting = true
+        default:
+            customAnimator.isPresenting = false
+            return nil
+           
         }
+        
+        return customAnimator
     }
 
 }

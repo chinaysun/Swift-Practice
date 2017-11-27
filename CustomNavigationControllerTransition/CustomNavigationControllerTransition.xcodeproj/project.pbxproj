@@ -14,6 +14,7 @@
 		A86E4A191FC7E66E0081E18E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A86E4A171FC7E66E0081E18E /* LaunchScreen.storyboard */; };
 		A8E5C80F1FCB81F900A9C423 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E5C80E1FCB81F800A9C423 /* ImageCollectionViewCell.swift */; };
 		A8FAAF071FCB8CDE00764AA2 /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FAAF061FCB8CDE00764AA2 /* SecondVC.swift */; };
+		A8FAAF091FCB8FB300764AA2 /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FAAF081FCB8FB300764AA2 /* CustomAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A86E4A1A1FC7E66E0081E18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8E5C80E1FCB81F800A9C423 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCollectionViewCell.swift; path = ../../CollectionViewLearning/CollectionViewLearning/ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		A8FAAF061FCB8CDE00764AA2 /* SecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondVC.swift; sourceTree = "<group>"; };
+		A8FAAF081FCB8FB300764AA2 /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				A86E4A121FC7E66E0081E18E /* Main.storyboard */,
 				A8E5C80E1FCB81F800A9C423 /* ImageCollectionViewCell.swift */,
 				A86E4A201FC7E6840081E18E /* Supporting File */,
+				A8FAAF081FCB8FB300764AA2 /* CustomAnimator.swift */,
 			);
 			path = CustomNavigationControllerTransition;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 				A8E5C80F1FCB81F900A9C423 /* ImageCollectionViewCell.swift in Sources */,
 				A86E4A111FC7E66E0081E18E /* ViewController.swift in Sources */,
 				A8FAAF071FCB8CDE00764AA2 /* SecondVC.swift in Sources */,
+				A8FAAF091FCB8FB300764AA2 /* CustomAnimator.swift in Sources */,
 				A86E4A0F1FC7E66E0081E18E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
