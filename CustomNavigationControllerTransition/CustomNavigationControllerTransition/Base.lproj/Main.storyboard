@@ -22,17 +22,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="6oh-pk-Jt1"/>
                     <connections>
-                        <segue destination="UFh-KC-wYj" kind="show" id="2sD-gR-1V2"/>
+                        <segue destination="UFh-KC-wYj" kind="show" identifier="showImage" id="2sD-gR-1V2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="535" y="134"/>
         </scene>
-        <!--View Controller-->
+        <!--SecondVC-->
         <scene sceneID="0rr-Xl-MjN">
             <objects>
-                <viewController id="UFh-KC-wYj" sceneMemberID="viewController">
+                <viewController id="UFh-KC-wYj" customClass="SecondVC" customModule="CustomNavigationControllerTransition" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5bs-OB-lwg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,6 +85,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ylk-bQ-4Vl"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="D0D-45-1c0" id="Wpf-h4-mDh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5H-oo-0xn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
