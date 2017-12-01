@@ -70,6 +70,8 @@ class SecondVC: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
+        tableView.setEditing(true, animated: true)
+        
         self.viewModel.tableViewSource
             .bind(to: tableView.rx.items(cellIdentifier: "Cell", cellType: cellType)){
             
@@ -78,6 +80,12 @@ class SecondVC: UIViewController {
             cell.textLabel?.text = "\(element) @ row \(row)"
             }
             .disposed(by: self.disposeBag)
+        
+        
+        tableView.rx.itemMoved
+            .bind(to: self.viewModel.moveItem)
+            .disposed(by: self.disposeBag)
+        
         
         
         
@@ -104,9 +112,21 @@ class SecondVC: UIViewController {
         collectionView.register(cellType, forCellWithReuseIdentifier: cellID)
         collectionView.register(cellType, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerID)
         
+        collectionView.layer.borderWidth = 2
+        collectionView.layer.borderColor = UIColor.black.cgColor
+        collectionView.layer.cornerRadius = 3
+        collectionView.clipsToBounds = true
+        
+        collectionView.backgroundColor = UIColor.white
+    
         let dataSource = RxCollectionViewSectionedReloadDataSource<MySection>(configureCell: {ds,cv,ip,item in
             let cell = cv.dequeueReusableCell(withReuseIdentifier: cellID, for: ip)
             cell.backgroundColor = item
+            cell.layer.borderWidth = 2
+            cell.layer.borderColor = UIColor.purple.cgColor
+            cell.layer.cornerRadius = 3
+            cell.clipsToBounds = true
+            
             return cell
         }, configureSupplementaryView: { ds,cv,kind,ip in
             
@@ -124,16 +144,10 @@ class SecondVC: UIViewController {
         Observable.just(sections)
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
-        //don need this if you set up the reference size in flowlay out
-//        collectionView.rx.setDelegate(self)
-//            .disposed(by: disposeBag)
 
-        
         return collectionView
     }()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -193,12 +207,4 @@ class SecondVC: UIViewController {
     }
 
 }
-
-//extension SecondVC: UICollectionViewDelegateFlowLayout
-//{
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-//        return CGSize(width: 80, height: collectionView.frame.height)
-//    }
-//
-//}
 

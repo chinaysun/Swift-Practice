@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // let rootController = FirstVC() // Button + Label + CollectionView
+        let rootController = FirstVC() // Button + Label + CollectionView
         // let rootController = VariablesVC() // Variables
-        let rootController = GestureVC() // Gesture + Animation
+        // let rootController = GestureVC() // Gesture + Animation
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UINavigationController(rootViewController: rootController)
         window?.makeKeyAndVisible()
