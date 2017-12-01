@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // let rootController = FirstVC() // Button + Label + CollectionView
-        let rootController = VariablesVC() // Variables
+        // let rootController = VariablesVC() // Variables
+        let rootController = GestureVC() // Gesture + Animation
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UINavigationController(rootViewController: rootController)
         window?.makeKeyAndVisible()
