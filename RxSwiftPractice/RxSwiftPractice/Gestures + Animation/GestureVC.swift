@@ -15,6 +15,35 @@ class GestureVC: UIViewController {
     private let disposeBag: DisposeBag = DisposeBag()
     private let viewModel: GestureViewModel = GestureViewModel(cardState: .cardFront)
     
+    
+    lazy var tableView: UITableView = {
+        
+        let tableView: UITableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        let cellType = UITableViewCell.self
+        let cellId = "Cell"
+        
+        tableView.register(cellType, forCellReuseIdentifier: cellId)
+        
+        viewModel.tableViewDataSource
+            .bind(to: tableView.rx.items(cellIdentifier: cellId, cellType: cellType)) {
+                
+                _, element, cell in
+                
+                cell.textLabel?.text = element
+            }
+            .disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(String.self)
+            .bind(to: viewModel.selectedOperation)
+            .disposed(by: disposeBag)
+        
+        
+        return tableView
+    }()
+    
     lazy var cardFrontView: UIView = {
         
         let view: UIView = UIView()
@@ -88,6 +117,8 @@ class GestureVC: UIViewController {
         carContainerView.addSubview(cardFrontView)
         carContainerView.addSubview(cardBackView)
         
+        view.addSubview(tableView)
+        
         layoutUI()
         bindViewModel()
     }
@@ -95,7 +126,7 @@ class GestureVC: UIViewController {
     private func layoutUI() {
         
        NSLayoutConstraint.activate([
-            carContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            carContainerView.leftAnchor.constraint(equalTo: tableView.rightAnchor, constant: 50),
             carContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             carContainerView.widthAnchor.constraint(equalToConstant: 150),
             carContainerView.heightAnchor.constraint(equalToConstant: 300),
@@ -108,7 +139,12 @@ class GestureVC: UIViewController {
             cardBackView.topAnchor.constraint(equalTo: carContainerView.topAnchor),
             cardBackView.bottomAnchor.constraint(equalTo: carContainerView.bottomAnchor),
             cardBackView.leftAnchor.constraint(equalTo: carContainerView.leftAnchor),
-            cardBackView.rightAnchor.constraint(equalTo: carContainerView.rightAnchor)
+            cardBackView.rightAnchor.constraint(equalTo: carContainerView.rightAnchor),
+            
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.widthAnchor.constraint(equalToConstant: 150)
         
         ])
         
@@ -140,6 +176,14 @@ class GestureVC: UIViewController {
                                   options: options,
                                   completion: nil)
                 
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.selectedOperation
+            .subscribe(onNext: { operation in
+                if operation == "FlipCard" {
+                    self.viewModel.flipCard.onNext(.buttonTapped)
+                }
             })
             .disposed(by: disposeBag)
         

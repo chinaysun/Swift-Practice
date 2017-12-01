@@ -27,8 +27,11 @@ class GestureViewModel {
     
     // MARK: - Action
     let flipCard: BehaviorSubject<FlipCardAction?> = BehaviorSubject(value: nil)
+    let selectedOperation: BehaviorSubject<String> = BehaviorSubject(value: "")
     
     // MARK: - Observers
+    lazy var tableViewDataSource: Observable<[String]> = Observable.just(["FlipCard", "SpinWheel"])
+    
     lazy var state: Observable<GestureViewModel.CardState> = internalCardState.asObservable()
     lazy var stateChanged: Observable<(GestureViewModel.CardState, GestureViewModel.CardState)> = {
        
