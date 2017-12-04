@@ -30,7 +30,9 @@ class GestureViewModel {
     let selectedOperation: BehaviorSubject<String> = BehaviorSubject(value: "")
     
     // MARK: - Observers
-    lazy var tableViewDataSource: Observable<[String]> = Observable.just(["FlipCard", "SpinWheel"])
+    lazy var tableViewDataSource: Observable<[String]> = Observable.just(["FlipCard", "SpinWheel","Drag&Drop"])
+    
+    lazy var collectionViewDataSource: Observable<[String]> = Observable.just(["Cell-A","Cell-B","Cell-C","Cell-D","Cell-E","Cell-F"])
     
     lazy var state: Observable<GestureViewModel.CardState> = internalCardState.asObservable()
     lazy var stateChanged: Observable<(GestureViewModel.CardState, GestureViewModel.CardState)> = {

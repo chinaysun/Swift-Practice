@@ -69,11 +69,12 @@ class GestureVC: UIViewController {
         return view
     }()
     
-    lazy var carContainerView: UIView = {
+    lazy var cardContainerView: UIView = {
         
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
+        view.accessibilityIdentifier = "FlipCard"
         
         let tapGesture = UITapGestureRecognizer()
         view.addGestureRecognizer(tapGesture)
@@ -105,6 +106,38 @@ class GestureVC: UIViewController {
         
         return view
     }()
+    
+    lazy var collectionView: UICollectionView = {
+       
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.minimumInteritemSpacing = 1
+        flowLayout.minimumLineSpacing = 1
+        flowLayout.itemSize = CGSize(width: 200, height: 50)
+        
+        let collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.alpha = 0
+        
+        let cellType = CustomCollectionViewCell.self
+        let cellId = "cell"
+        
+        collectionView.register(cellType, forCellWithReuseIdentifier: cellId)
+        collectionView.accessibilityIdentifier = "Drag&Drop"
+        
+        viewModel.collectionViewDataSource
+            .bind(to: collectionView.rx.items(cellIdentifier: cellId, cellType: cellType)) {
+                _, element, cell in
+                
+                cell.textLabel.text = element
+            }
+            .disposed(by: disposeBag)
+        
+        
+        return collectionView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,11 +146,12 @@ class GestureVC: UIViewController {
         self.navigationController?.isNavigationBarHidden = true 
         
         // Do any additional setup after loading the view.
-        view.addSubview(carContainerView)
-        carContainerView.addSubview(cardFrontView)
-        carContainerView.addSubview(cardBackView)
+        view.addSubview(cardContainerView)
+        cardContainerView.addSubview(cardFrontView)
+        cardContainerView.addSubview(cardBackView)
         
         view.addSubview(tableView)
+        view.addSubview(collectionView)
         
         layoutUI()
         bindViewModel()
@@ -126,25 +160,30 @@ class GestureVC: UIViewController {
     private func layoutUI() {
         
        NSLayoutConstraint.activate([
-            carContainerView.leftAnchor.constraint(equalTo: tableView.rightAnchor, constant: 50),
-            carContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            carContainerView.widthAnchor.constraint(equalToConstant: 150),
-            carContainerView.heightAnchor.constraint(equalToConstant: 300),
+            cardContainerView.leftAnchor.constraint(equalTo: tableView.rightAnchor, constant: 50),
+            cardContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            cardContainerView.widthAnchor.constraint(equalToConstant: 150),
+            cardContainerView.heightAnchor.constraint(equalToConstant: 300),
             
-            cardFrontView.topAnchor.constraint(equalTo: carContainerView.topAnchor),
-            cardFrontView.bottomAnchor.constraint(equalTo: carContainerView.bottomAnchor),
-            cardFrontView.leftAnchor.constraint(equalTo: carContainerView.leftAnchor),
-            cardFrontView.rightAnchor.constraint(equalTo: carContainerView.rightAnchor),
+            cardFrontView.topAnchor.constraint(equalTo: cardContainerView.topAnchor),
+            cardFrontView.bottomAnchor.constraint(equalTo: cardContainerView.bottomAnchor),
+            cardFrontView.leftAnchor.constraint(equalTo: cardContainerView.leftAnchor),
+            cardFrontView.rightAnchor.constraint(equalTo: cardContainerView.rightAnchor),
             
-            cardBackView.topAnchor.constraint(equalTo: carContainerView.topAnchor),
-            cardBackView.bottomAnchor.constraint(equalTo: carContainerView.bottomAnchor),
-            cardBackView.leftAnchor.constraint(equalTo: carContainerView.leftAnchor),
-            cardBackView.rightAnchor.constraint(equalTo: carContainerView.rightAnchor),
+            cardBackView.topAnchor.constraint(equalTo: cardContainerView.topAnchor),
+            cardBackView.bottomAnchor.constraint(equalTo: cardContainerView.bottomAnchor),
+            cardBackView.leftAnchor.constraint(equalTo: cardContainerView.leftAnchor),
+            cardBackView.rightAnchor.constraint(equalTo: cardContainerView.rightAnchor),
             
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.widthAnchor.constraint(equalToConstant: 150)
+            tableView.widthAnchor.constraint(equalToConstant: 150),
+            
+            collectionView.leftAnchor.constraint(equalTo: tableView.rightAnchor, constant: 10),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 160)
         
         ])
         
@@ -181,9 +220,9 @@ class GestureVC: UIViewController {
         
         viewModel.selectedOperation
             .subscribe(onNext: { operation in
-                if operation == "FlipCard" {
-                    self.viewModel.flipCard.onNext(.buttonTapped)
-                }
+                
+                self.viewAlphManager(showView: operation)
+            
             })
             .disposed(by: disposeBag)
         
@@ -197,5 +236,66 @@ class GestureVC: UIViewController {
         case .cardBack: return cardBackView
         }
     }
+    
+    private func viewAlphManager(showView: String) {
+        
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       options: .curveEaseInOut,
+                       animations: {
+                        self.collectionView.alpha =  self.collectionView.accessibilityIdentifier == showView ? 1 : 0
+                        self.cardContainerView.alpha =  self.cardContainerView.accessibilityIdentifier == showView ? 1 : 0
+                        
+                       }, completion: { _ in
+                        self.performOperation(operation: showView)
+                       })
+    
+    }
+    
+    private func performOperation(operation: String) {
+        
+        switch operation {
+        case "FlipCard":
+            self.viewModel.flipCard.onNext(.buttonTapped)
+        default:
+            break
+        }
+        
+    }
 
 }
+
+
+class CustomCollectionViewCell: UICollectionViewCell {
+    
+    lazy var textLabel: UILabel = {
+       
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.layer.borderColor = UIColor.brown.cgColor
+        label.layer.borderWidth = 2
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.addSubview(textLabel)
+        
+        NSLayoutConstraint.activate([
+                textLabel.leftAnchor.constraint(equalTo: leftAnchor),
+                textLabel.rightAnchor.constraint(equalTo: rightAnchor),
+                textLabel.topAnchor.constraint(equalTo: topAnchor),
+                textLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            ])
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
