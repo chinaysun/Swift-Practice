@@ -25,14 +25,18 @@ class GestureViewModel {
     private var disposeBag: DisposeBag = DisposeBag()
     private var internalCardState: BehaviorSubject<GestureViewModel.CardState>
     
+    
     // MARK: - Action
     let flipCard: BehaviorSubject<FlipCardAction?> = BehaviorSubject(value: nil)
     let selectedOperation: BehaviorSubject<String> = BehaviorSubject(value: "")
+    let longPressGesture: BehaviorSubject<UILongPressGestureRecognizer?> = BehaviorSubject(value: nil)
     
     // MARK: - Observers
     lazy var tableViewDataSource: Observable<[String]> = Observable.just(["FlipCard", "SpinWheel","Drag&Drop"])
     
-    lazy var collectionViewDataSource: Observable<[String]> = Observable.just(["Cell-A","Cell-B","Cell-C","Cell-D","Cell-E","Cell-F"])
+    lazy var collectionViewDataSource: BehaviorSubject<[String]> = BehaviorSubject(value: ["Cell-A","Cell-B","Cell-C","Cell-D","Cell-E","Cell-F"])
+    
+
     
     lazy var state: Observable<GestureViewModel.CardState> = internalCardState.asObservable()
     lazy var stateChanged: Observable<(GestureViewModel.CardState, GestureViewModel.CardState)> = {
