@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
-    let backgroundColor: [UIColor] = [
+    var backgroundColor: [UIColor] = [
         UIColor.blue,
         UIColor.brown,
         UIColor.yellow,
@@ -115,6 +115,11 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                 scrollButton.heightAnchor.constraint(equalToConstant: 50)
             
             ])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let temp = backgroundColor.remove(at: sourceIndexPath.item)
+        backgroundColor.insert(temp, at: destinationIndexPath.item)
     }
 
 }

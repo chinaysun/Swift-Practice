@@ -129,13 +129,6 @@ class GestureVC: UIViewController {
         collectionView.register(cellType, forCellWithReuseIdentifier: cellId)
         collectionView.accessibilityIdentifier = "Drag&Drop"
         
-        let longPressGesture = UILongPressGestureRecognizer()
-        collectionView.addGestureRecognizer(longPressGesture)
-        
-        longPressGesture.rx.event
-            .bind(to: viewModel.longPressGesture)
-            .disposed(by: disposeBag)
-        
         viewModel.collectionViewDataSource
             .bind(to: collectionView.rx.items(cellIdentifier: cellId, cellType: cellType)) {
                 _, element, cell in
@@ -143,7 +136,6 @@ class GestureVC: UIViewController {
                 cell.textLabel.text = element
             }
             .disposed(by: disposeBag)
-        
         
         return collectionView
     }()
@@ -232,25 +224,6 @@ class GestureVC: UIViewController {
                 
                 self.viewAlphManager(showView: operation)
             
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.longPressGesture
-            .flatMap { Observable.from(optional: $0) }
-            .subscribe(onNext: { [weak self] gesture in
-                
-                switch gesture.state {
-                    case .began:
-                        
-                        guard let selectedIndexPath = self?.collectionView.indexPathForItem(at: gesture.location(in: self?.collectionView)) else { return }
-                            self?.collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
-                    case .changed:
-                        self?.collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
-                    case .ended:
-                        self?.collectionView.endInteractiveMovement()
-                    default:
-                        self?.collectionView.cancelInteractiveMovement()
-                }
             })
             .disposed(by: disposeBag)
         
