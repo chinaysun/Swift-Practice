@@ -10,6 +10,8 @@ import UIKit
 
 class TeslaProdictionViewController: UIViewController {
     
+    let cars = Cars()
+    
     lazy var modelLabel: UILabel = {
         var label: UILabel = UILabel()
         label.text = "MODEL"
@@ -24,6 +26,7 @@ class TeslaProdictionViewController: UIViewController {
         let segement: UISegmentedControl = UISegmentedControl(items: ["Model 3","Model S", "Model X"])
         segement.translatesAutoresizingMaskIntoConstraints = false
         segement.selectedSegmentIndex = 2
+        segement.addTarget(self, action: #selector(applyConditionsChanged), for: .valueChanged)
         
         return segement
     }()
@@ -42,6 +45,7 @@ class TeslaProdictionViewController: UIViewController {
         let segement: UISegmentedControl = UISegmentedControl(items: ["Not Installed","Installed"])
         segement.translatesAutoresizingMaskIntoConstraints = false
         segement.selectedSegmentIndex = 0
+        segement.addTarget(self, action: #selector(applyConditionsChanged), for: .valueChanged)
         
         return segement
     }()
@@ -63,6 +67,8 @@ class TeslaProdictionViewController: UIViewController {
         slider.minimumValue = 0
         slider.setValue(10000, animated: false)
         
+        slider.addTarget(self, action: #selector(applyConditionsChanged), for: UIControlEvents.valueChanged)
+        
         return slider
     }()
     
@@ -80,6 +86,7 @@ class TeslaProdictionViewController: UIViewController {
         let segement: UISegmentedControl = UISegmentedControl(items: ["Poor","Ok","Good","Great"])
         segement.translatesAutoresizingMaskIntoConstraints = false
         segement.selectedSegmentIndex = 2
+        segement.addTarget(self, action: #selector(applyConditionsChanged), for: .valueChanged)
         
         return segement
     }()
@@ -128,7 +135,37 @@ class TeslaProdictionViewController: UIViewController {
         
         return view
     }()
-
+    
+    @objc func applyConditionsChanged() {
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 0
+        let formattedMileage = formatter.string(for: mileageSlider.value) ?? "0"
+        mileageLabel.text = "MILEAGE \(formattedMileage) miles"
+        
+        // create a prediction by passing in all its input from our ui
+        if let prediction = try? cars.prediction(
+            model: Double(modelSegement.selectedSegmentIndex),
+            premium: Double(premiumSegment.selectedSegmentIndex),
+            mileage: Double(mileageSlider.value),
+            condition: Double(conditionSegment.selectedSegmentIndex)) {
+            
+            //clamp the price so it's at least $2000
+            let clampedValuation = max(2000, prediction.price)
+            
+            //make our number formatter output
+            formatter.numberStyle = .currency
+            
+            priceLabel.text = formatter.string(for: clampedValuation)
+            
+        }else {
+            priceLabel.text = "Error"
+        }
+        
+        
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,6 +180,8 @@ class TeslaProdictionViewController: UIViewController {
                 stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
                 
             ])
+        
+        applyConditionsChanged()
         
     }
 
