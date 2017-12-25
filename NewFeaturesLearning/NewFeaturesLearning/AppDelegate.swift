@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let rootViewController = SimpleDragAndDrop()
+        let rootViewController = TeslaMainViewController()
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         

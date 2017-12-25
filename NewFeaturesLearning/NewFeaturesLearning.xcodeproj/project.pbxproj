@@ -10,9 +10,10 @@
 		8C1637EF1FB87A880094951E /* Cars.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8C1637EC1FB87A880094951E /* Cars.mlmodel */; };
 		8C4768901FB1795E00520D76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C47688F1FB1795E00520D76 /* AppDelegate.swift */; };
 		8C4768921FB1795E00520D76 /* SimpleDragAndDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4768911FB1795E00520D76 /* SimpleDragAndDrop.swift */; };
-		8C4768951FB1795E00520D76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4768931FB1795E00520D76 /* Main.storyboard */; };
 		8C4768971FB1795E00520D76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C4768961FB1795E00520D76 /* Assets.xcassets */; };
 		8C47689A1FB1795E00520D76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4768981FB1795E00520D76 /* LaunchScreen.storyboard */; };
+		8CE97A0C1FF08A0A00CDAD1B /* TeslaMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE97A0B1FF08A0A00CDAD1B /* TeslaMainViewController.swift */; };
+		8CE97A0E1FF0975800CDAD1B /* TeslaProdictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE97A0D1FF0975800CDAD1B /* TeslaProdictionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,10 +23,11 @@
 		8C47688C1FB1795E00520D76 /* NewFeaturesLearning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewFeaturesLearning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C47688F1FB1795E00520D76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C4768911FB1795E00520D76 /* SimpleDragAndDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDragAndDrop.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		8C4768941FB1795E00520D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C4768961FB1795E00520D76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C4768991FB1795E00520D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C47689B1FB1795E00520D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CE97A0B1FF08A0A00CDAD1B /* TeslaMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeslaMainViewController.swift; sourceTree = "<group>"; };
+		8CE97A0D1FF0975800CDAD1B /* TeslaProdictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeslaProdictionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 		8C1637E81FB8701F0094951E /* TradeMyTesla */ = {
 			isa = PBXGroup;
 			children = (
+				8CE97A0A1FF089C500CDAD1B /* Screens */,
 				8C1637E91FB87A470094951E /* Model */,
 			);
 			path = TradeMyTesla;
@@ -88,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				8C47689B1FB1795E00520D76 /* Info.plist */,
-				8C4768931FB1795E00520D76 /* Main.storyboard */,
 				8C4768961FB1795E00520D76 /* Assets.xcassets */,
 				8C4768981FB1795E00520D76 /* LaunchScreen.storyboard */,
 			);
@@ -101,6 +103,15 @@
 				8C4768911FB1795E00520D76 /* SimpleDragAndDrop.swift */,
 			);
 			path = SImpleDragAndDrop;
+			sourceTree = "<group>";
+		};
+		8CE97A0A1FF089C500CDAD1B /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				8CE97A0B1FF08A0A00CDAD1B /* TeslaMainViewController.swift */,
+				8CE97A0D1FF0975800CDAD1B /* TeslaProdictionViewController.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,7 +175,6 @@
 			files = (
 				8C47689A1FB1795E00520D76 /* LaunchScreen.storyboard in Resources */,
 				8C4768971FB1795E00520D76 /* Assets.xcassets in Resources */,
-				8C4768951FB1795E00520D76 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +186,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C4768921FB1795E00520D76 /* SimpleDragAndDrop.swift in Sources */,
+				8CE97A0C1FF08A0A00CDAD1B /* TeslaMainViewController.swift in Sources */,
 				8C4768901FB1795E00520D76 /* AppDelegate.swift in Sources */,
+				8CE97A0E1FF0975800CDAD1B /* TeslaProdictionViewController.swift in Sources */,
 				8C1637EF1FB87A880094951E /* Cars.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,14 +196,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8C4768931FB1795E00520D76 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8C4768941FB1795E00520D76 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8C4768981FB1795E00520D76 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
